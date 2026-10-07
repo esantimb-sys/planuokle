@@ -26,7 +26,7 @@ const HERO_IMG =
   "https://images.unsplash.com/photo-1707129785947-ddc627a8bab9?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
 
 const DISCLAIMER =
-  "SVARBU / TEISINĖ INFORMACIJA: Ši svetainė ir joje pateikiama informacija yra tik rekomendacinio bei šviečiamojo pobūdžio. Planuoklio pateikiami duomenys, dozės ir laikai negali būti traktuojami kaip medicininė diagnozė, gydymo skyrimas ar sveikatos priežiūros specialisto konsultacija. Prieš pradedant vartoti bet kokius maisto papildus ar keičiant jų dozes, būtina pasitarti su gydytoju arba gydytoju dietologu. Svetainės administracija neprisiima atsakomybės už sprendimus, priimtus remiantis šio įrankio informacija.";
+  "SVARBU / TEISINĖ INFORMACIJA: Ši svetainė ir joje pateikiama informacija yra tik rekomendacinio bei šviečiamojo pobūdžio. Planuoklės pateikiami duomenys, dozės ir laikai negali būti traktuojami kaip medicininė diagnozė, gydymo skyrimas ar sveikatos priežiūros specialisto konsultacija. Prieš pradedant vartoti bet kokius maisto papildus ar keičiant jų dozes, būtina pasitarti su gydytoju arba gydytoju dietologu. Svetainės administracija neprisiima atsakomybės už sprendimus, priimtus remiantis šio įrankio informacija.";
 
 function encodeState(state) {
   try {
@@ -180,7 +180,7 @@ export default function PlannerPage() {
           </span>
           <span className="leading-tight">
             <span className="block font-heading font-extrabold text-slate-900 text-base">5op.lt</span>
-            <span className="block text-[11px] text-slate-500 -mt-0.5">Papildų vartojimo Planuoklis</span>
+            <span className="block text-[11px] text-slate-500 -mt-0.5">Papildų vartojimo Planuoklė</span>
           </span>
         </a>
         <a
