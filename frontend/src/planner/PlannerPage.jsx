@@ -202,7 +202,7 @@ export default function PlannerPage() {
               <FlaskConical className="h-3.5 w-3.5" /> Moksliškai pagrįsta
             </span>
             <h1 className="mt-5 font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.08]">
-              Vitaminų ir papildų <span className="text-teal-600">vartojimo laiko</span> planuoklis
+              Vitaminų ir papildų <span className="text-teal-600">vartojimo laiko</span> planuoklė
             </h1>
             <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
               Sudarykite asmeninį dienos grafiką pagal savo profilį. Optimalus laikas, dozės ir moksliniai pagrindimai – viename įrankyje.
@@ -507,11 +507,11 @@ export default function PlannerPage() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
                 <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed">Vitaminų ir papildų vartojimo planuoklis. Moksliškai pagrįstas laikas ir dozės.</p>
+              <p className="text-sm text-slate-400 leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
             </div>
             <div>
               <h4 className="font-heading font-bold text-white mb-3">Partnerystė</h4>
-              <p className="text-sm text-slate-400 leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šiame planuoklyje?</p>
+              <p className="text-sm text-slate-400 leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
               <a data-testid="partnership-contact-email-link" href="mailto:partneryste@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
                 <Mail className="h-4 w-4" /> partneryste@5op.lt
               </a>
