@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import {
   Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble, FlaskConical, ShieldAlert,
   Download, Link2, Plus, Trash2, ExternalLink, Mars, Venus, Baby, Leaf, Clock,
-  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search,
+  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -394,10 +394,26 @@ export default function PlannerPage() {
                             type="button"
                             data-testid={`custom-suggestion-${item.name}`}
                             onMouseDown={(e) => { e.preventDefault(); pickSuggestion(item); }}
-                            className="w-full text-left px-3 py-2 hover:bg-teal-50 flex items-center justify-between gap-2"
+                            className="w-full text-left px-3 py-2.5 hover:bg-teal-50 border-b border-slate-100 last:border-0"
                           >
-                            <span className="text-sm font-medium text-slate-800">{item.name}</span>
-                            <span className="text-[11px] text-teal-700 font-semibold shrink-0">{item.dose}</span>
+                            <span className="flex items-center justify-between gap-2">
+                              <span className="text-sm font-medium text-slate-800">{item.name}</span>
+                              <span className="text-[11px] text-teal-700 font-semibold shrink-0">{item.dose}</span>
+                            </span>
+                            {(item.synergy || item.caution) && (
+                              <span className="mt-1 flex flex-wrap gap-1.5">
+                                {item.synergy && (
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-teal-700 bg-teal-50 border border-teal-200 px-1.5 py-0.5 rounded-full">
+                                    <Sparkles className="h-2.5 w-2.5" /> {item.synergy}
+                                  </span>
+                                )}
+                                {item.caution && (
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full">
+                                    <AlertTriangle className="h-2.5 w-2.5" /> {item.caution}
+                                  </span>
+                                )}
+                              </span>
+                            )}
                           </button>
                         </li>
                       ))}
