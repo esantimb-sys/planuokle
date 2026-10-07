@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import {
   Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble, FlaskConical, ShieldAlert,
   Download, Link2, Plus, Trash2, ExternalLink, Mars, Venus, Baby, Leaf, Clock,
-  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown,
+  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -16,7 +16,7 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS,
+  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, searchCustomDb, findCustomExact,
   doseFor, stomachText, getWarnings,
 } from "@/planner/data";
 
@@ -69,6 +69,7 @@ export default function PlannerPage() {
   const [cName, setCName] = useState("");
   const [cDose, setCDose] = useState("");
   const [cBlock, setCBlock] = useState("rytas");
+  const [showSug, setShowSug] = useState(false);
   const captureRef = useRef(null);
 
   const buildShareUrl = () => {
@@ -93,7 +94,33 @@ export default function PlannerPage() {
     setCustom((prev) => [...prev, { id: `c-${Date.now()}`, name: cName.trim(), dose: cDose.trim(), block: cBlock }]);
     setCName("");
     setCDose("");
+    setShowSug(false);
     toast.success("Papildas pridėtas į grafiką");
+  };
+
+  const clearAll = () => {
+    setSelected([]);
+    setCustom([]);
+    toast.success("Visos varnelės nuimtos");
+  };
+
+  const suggestions = useMemo(() => searchCustomDb(cName), [cName]);
+
+  const handleCustomName = (value) => {
+    setCName(value);
+    setShowSug(true);
+    const exact = findCustomExact(value);
+    if (exact) {
+      setCDose(exact.dose);
+      setCBlock(exact.block);
+    }
+  };
+
+  const pickSuggestion = (item) => {
+    setCName(item.name);
+    setCDose(item.dose);
+    setCBlock(item.block);
+    setShowSug(false);
   };
 
   const warnings = useMemo(() => getWarnings(selected, profile), [selected, profile]);
@@ -275,10 +302,20 @@ export default function PlannerPage() {
 
             {/* Supplements */}
             <section className="bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-6">
-              <h2 className="font-heading text-lg font-bold text-slate-900 flex items-center gap-2">
-                <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-teal-50 text-teal-700 text-sm font-bold">2</span>
-                Pasirinkite papildus
-              </h2>
+              <div className="flex items-center justify-between gap-2">
+                <h2 className="font-heading text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-teal-50 text-teal-700 text-sm font-bold">2</span>
+                  Pasirinkite papildus
+                </h2>
+                <button
+                  data-testid="clear-all-button"
+                  onClick={clearAll}
+                  disabled={selected.length === 0 && custom.length === 0}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 text-slate-600 text-xs font-semibold px-3 py-1.5 hover:border-rose-300 hover:text-rose-600 active:scale-95 transition-all disabled:opacity-40 disabled:pointer-events-none"
+                >
+                  <Eraser className="h-3.5 w-3.5" /> Išvalyti visus
+                </button>
+              </div>
 
               {[1, 2].map((cat) => (
                 <div key={cat} data-testid={cat === 1 ? "supplement-cat-basic-container" : "supplement-cat-biohacking-container"} className="space-y-2.5">
@@ -313,6 +350,18 @@ export default function PlannerPage() {
                               <Clock className="h-3 w-3" /> {dose} · {profileLabel}
                             </span>
                           )}
+                          {active && REFS[s.id] && (
+                            <a
+                              href={REFS[s.id]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              data-testid={`supplement-ref-link-${s.id}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+                            >
+                              <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                            </a>
+                          )}
                         </span>
                       </label>
                     );
@@ -323,7 +372,38 @@ export default function PlannerPage() {
               {/* Custom supplement */}
               <div className="space-y-3 pt-2 border-t border-slate-100">
                 <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">Pridėkite savo papildą</h3>
-                <Input data-testid="custom-supplement-text-input" placeholder="Papildo pavadinimas" value={cName} onChange={(e) => setCName(e.target.value)} />
+                <div className="relative">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                    <Input
+                      data-testid="custom-supplement-text-input"
+                      className="pl-9"
+                      placeholder="Pradėkite rašyti (pvz., selenas, nmn...)"
+                      value={cName}
+                      autoComplete="off"
+                      onChange={(e) => handleCustomName(e.target.value)}
+                      onFocus={() => setShowSug(true)}
+                      onBlur={() => setTimeout(() => setShowSug(false), 150)}
+                    />
+                  </div>
+                  {showSug && suggestions.length > 0 && (
+                    <ul data-testid="custom-supplement-suggestions" className="absolute z-30 mt-1 w-full max-h-60 overflow-auto rounded-xl border border-slate-200 bg-white shadow-lg">
+                      {suggestions.map((item) => (
+                        <li key={item.name}>
+                          <button
+                            type="button"
+                            data-testid={`custom-suggestion-${item.name}`}
+                            onMouseDown={(e) => { e.preventDefault(); pickSuggestion(item); }}
+                            className="w-full text-left px-3 py-2 hover:bg-teal-50 flex items-center justify-between gap-2"
+                          >
+                            <span className="text-sm font-medium text-slate-800">{item.name}</span>
+                            <span className="text-[11px] text-teal-700 font-semibold shrink-0">{item.dose}</span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
                 <div className="grid grid-cols-2 gap-3">
                   <Input placeholder="Dozė (pvz., 500 mg)" value={cDose} onChange={(e) => setCDose(e.target.value)} data-testid="custom-supplement-dose-input" />
                   <Select value={cBlock} onValueChange={setCBlock}>

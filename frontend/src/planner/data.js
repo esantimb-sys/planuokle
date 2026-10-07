@@ -154,3 +154,107 @@ export function getWarnings(selectedIds, profile) {
   }
   return w;
 }
+
+// Short scientific reference per standard supplement (meta-analysis / study)
+export const REFS = {
+  "magnis-glicinatas": "https://pubmed.ncbi.nlm.nih.gov/?term=magnesium+supplementation+sleep+meta-analysis",
+  "magnis-malatas": "https://pubmed.ncbi.nlm.nih.gov/?term=magnesium+malate+supplementation",
+  "gelezis": "https://pubmed.ncbi.nlm.nih.gov/?term=iron+supplementation+meta-analysis",
+  "d3k2": "https://doi.org/10.1136/bmj.i6583",
+  "cinkas": "https://pubmed.ncbi.nlm.nih.gov/?term=zinc+supplementation+meta-analysis",
+  "b-kompleksas": "https://pubmed.ncbi.nlm.nih.gov/?term=b+vitamins+supplementation+meta-analysis",
+  "omega3": "https://pubmed.ncbi.nlm.nih.gov/?term=omega-3+EPA+DHA+meta-analysis",
+  "vitc": "https://pubmed.ncbi.nlm.nih.gov/?term=vitamin+C+supplementation+meta-analysis",
+  "kalcis": "https://pubmed.ncbi.nlm.nih.gov/?term=calcium+supplementation+bone+meta-analysis",
+  "probiotikai": "https://pubmed.ncbi.nlm.nih.gov/?term=probiotics+meta-analysis",
+  "silimarinas": "https://pubmed.ncbi.nlm.nih.gov/?term=silymarin+liver+meta-analysis",
+  "msm": "https://pubmed.ncbi.nlm.nih.gov/?term=methylsulfonylmethane+MSM+meta-analysis",
+  "q10": "https://pubmed.ncbi.nlm.nih.gov/?term=coenzyme+Q10+ubiquinol+meta-analysis",
+  "melatoninas": "https://pubmed.ncbi.nlm.nih.gov/?term=melatonin+sleep+meta-analysis",
+  "multivitaminai": "https://pubmed.ncbi.nlm.nih.gov/?term=multivitamin+supplementation+meta-analysis",
+  "kreatinas": "https://doi.org/10.1186/s12970-017-0173-z",
+  "baltymas": "https://doi.org/10.1136/bjsports-2017-097608",
+  "citrulinas": "https://doi.org/10.1519/JSC.0000000000003426",
+  "kofeinas": "https://pubmed.ncbi.nlm.nih.gov/?term=caffeine+exercise+performance+meta-analysis",
+  "elektrolitai": "https://pubmed.ncbi.nlm.nih.gov/?term=electrolytes+hydration+exercise",
+  "beta-alaninas": "https://doi.org/10.1186/s12970-015-0090-y",
+  "taurinas": "https://pubmed.ncbi.nlm.nih.gov/?term=taurine+exercise+performance+meta-analysis",
+  "ltheanine": "https://pubmed.ncbi.nlm.nih.gov/?term=l-theanine+caffeine+cognition",
+  "ashwagandha": "https://doi.org/10.1097/MD.0000000000017186",
+};
+
+// Comprehensive local supplement DB for the custom "add your supplement" autocomplete.
+// block must match a BLOCK_OPTIONS value.
+export const CUSTOM_DB = [
+  { name: "Selenas", dose: "100–200 mcg", block: "pietus" },
+  { name: "Berberinas", dose: "500 mg (2–3 k./d.)", block: "pietus" },
+  { name: "Spirulina", dose: "3–5 g", block: "rytas" },
+  { name: "Lion's Mane (Ožkabarzdis)", dose: "500–1000 mg", block: "rytas" },
+  { name: "NMN (Nikotinamido mononukleotidas)", dose: "250–500 mg", block: "rytas" },
+  { name: "Q10 (Ubikinolis)", dose: "100–200 mg", block: "rytas" },
+  { name: "L-Glutaminas", dose: "5 g", block: "po-treniruotes" },
+  { name: "Omega-3 (EPA/DHA)", dose: "1–2 g", block: "pietus" },
+  { name: "Vitaminas A", dose: "700–900 mcg", block: "rytas" },
+  { name: "Vitaminas E", dose: "15 mg", block: "rytas" },
+  { name: "Vitaminas K2", dose: "100–200 mcg", block: "rytas" },
+  { name: "Vitaminas D3", dose: "2000–4000 UI", block: "rytas" },
+  { name: "Vitaminas C", dose: "500–1000 mg", block: "rytas" },
+  { name: "Vitaminas B12 (Metilkobalaminas)", dose: "500 mcg", block: "rytas" },
+  { name: "Vitaminas B6", dose: "1,3–2 mg", block: "rytas" },
+  { name: "Folio rūgštis (B9)", dose: "400 mcg", block: "rytas" },
+  { name: "Biotinas (B7)", dose: "30 mcg", block: "rytas" },
+  { name: "Niacinas (B3)", dose: "16 mg", block: "rytas" },
+  { name: "Jodas", dose: "150 mcg", block: "rytas" },
+  { name: "Chromas", dose: "200 mcg", block: "pietus" },
+  { name: "Varis", dose: "1–2 mg", block: "pietus" },
+  { name: "Manganas", dose: "2 mg", block: "pietus" },
+  { name: "Kalis", dose: "1000 mg", block: "pietus" },
+  { name: "Magnis", dose: "300–400 mg", block: "pries-miega" },
+  { name: "Cinkas", dose: "15 mg", block: "vakaras" },
+  { name: "Geležis", dose: "18 mg", block: "rytas" },
+  { name: "Kalcis", dose: "1000 mg", block: "vakaras" },
+  { name: "Kvercetinas", dose: "500 mg", block: "pietus" },
+  { name: "Resveratrolis", dose: "150–500 mg", block: "rytas" },
+  { name: "Kurkuminas", dose: "500–1000 mg", block: "pietus" },
+  { name: "Rodžiolė (Rhodiola)", dose: "200–400 mg", block: "rytas" },
+  { name: "Ginkmedis (Ginkgo biloba)", dose: "120–240 mg", block: "rytas" },
+  { name: "5-HTP", dose: "100–300 mg", block: "pries-miega" },
+  { name: "GABA", dose: "500–750 mg", block: "pries-miega" },
+  { name: "Glicinas", dose: "3 g", block: "pries-miega" },
+  { name: "L-Tirozinas", dose: "500–2000 mg", block: "rytas" },
+  { name: "L-Karnitinas", dose: "1–2 g", block: "pries-treniruote" },
+  { name: "HMB", dose: "3 g", block: "po-treniruotes" },
+  { name: "BCAA", dose: "5–10 g", block: "pries-treniruote" },
+  { name: "EAA (Nepakeičiamos aminorūgštys)", dose: "10 g", block: "po-treniruotes" },
+  { name: "Inozitolis", dose: "2–4 g", block: "pries-miega" },
+  { name: "Melatoninas", dose: "0,5–3 mg", block: "pries-miega" },
+  { name: "Ashwagandha", dose: "300–600 mg", block: "pries-miega" },
+  { name: "Kolagenas", dose: "10–15 g", block: "rytas" },
+  { name: "Hialurono rūgštis", dose: "120 mg", block: "rytas" },
+  { name: "Beta-gliukanai", dose: "250 mg", block: "rytas" },
+  { name: "Probiotikai", dose: "1 porcija", block: "rytas" },
+  { name: "Psyllium (skaidulos)", dose: "5 g", block: "pietus" },
+  { name: "Kreatino monohidratas", dose: "3–5 g", block: "po-treniruotes" },
+  { name: "Taurinas", dose: "1–2 g", block: "pries-treniruote" },
+  { name: "Beta-Alaninas", dose: "3–5 g", block: "pries-treniruote" },
+  { name: "Kofeinas", dose: "100–200 mg", block: "pries-treniruote" },
+  { name: "L-Theanine", dose: "100–200 mg", block: "rytas" },
+  { name: "L-Citrulinas", dose: "6–8 g", block: "pries-treniruote" },
+  { name: "Ashwagandha KSM-66", dose: "300–600 mg", block: "pries-miega" },
+  { name: "Kreatinas HCL", dose: "2–3 g", block: "po-treniruotes" },
+  { name: "Melisa (Lemon balm)", dose: "300–600 mg", block: "pries-miega" },
+  { name: "Valerijonas", dose: "300–600 mg", block: "pries-miega" },
+  { name: "Saulėgrąžų lecitinas", dose: "1200 mg", block: "rytas" },
+  { name: "Alfa lipoinė rūgštis (ALA)", dose: "300–600 mg", block: "pietus" },
+];
+
+export function searchCustomDb(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+  return CUSTOM_DB.filter((x) => x.name.toLowerCase().includes(q)).slice(0, 6);
+}
+
+export function findCustomExact(query) {
+  const q = query.trim().toLowerCase();
+  return CUSTOM_DB.find((x) => x.name.toLowerCase() === q) || null;
+}
