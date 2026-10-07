@@ -144,9 +144,19 @@ export default function PlannerPage() {
         const { default: jsPDF } = await import("jspdf");
         const img = canvas.toDataURL("image/png");
         const pdf = new jsPDF("p", "mm", "a4");
-        const w = 210;
-        const h = (canvas.height * w) / canvas.width;
-        pdf.addImage(img, "PNG", 0, 0, w, h);
+        const pageW = 210;
+        const pageH = 297;
+        const imgH = (canvas.height * pageW) / canvas.width;
+        let heightLeft = imgH;
+        let position = 0;
+        pdf.addImage(img, "PNG", 0, position, pageW, imgH);
+        heightLeft -= pageH;
+        while (heightLeft > 0) {
+          position -= pageH;
+          pdf.addPage();
+          pdf.addImage(img, "PNG", 0, position, pageW, imgH);
+          heightLeft -= pageH;
+        }
         pdf.save("5op-planuoklis.pdf");
       }
       toast.success("Grafikas atsisiųstas", { id: t });
