@@ -1,0 +1,184 @@
+{
+  "project_title": "Vitaminų ir papildų vartojimo laiko planuoklis (5op.lt)",
+  "brand": "5op.lt",
+  "language": "lt",
+  "app_type": "hybrid_fullstack_single_page_tool",
+  "design_archetype": "Organic & Earthy + High-Precision Clinical Biohacking (Light Theme with Subtle Gradients)",
+  "theme": {
+    "mode": "light",
+    "background_base": "bg-[#FAFBF9]",
+    "surface_cards": "bg-white/80 backdrop-blur-md border border-emerald-900/10 shadow-sm shadow-emerald-900/5",
+    "surface_elevated": "bg-white border border-slate-200 shadow-md shadow-slate-900/5",
+    "gradient_subtle_hero": "bg-gradient-to-br from-emerald-50/60 via-amber-50/30 to-teal-50/50",
+    "gradient_accent_glow": "bg-gradient-to-r from-teal-500/10 via-emerald-500/10 to-amber-500/10"
+  },
+  "colors": {
+    "primary": "#0D9488",
+    "primary_hover": "#0F766E",
+    "primary_light": "#CCFBF1",
+    "accent_warm": "#F59E0B",
+    "accent_warm_light": "#FEF3C7",
+    "secondary": "#1E293B",
+    "success": "#059669",
+    "warning": "#D97706",
+    "danger": "#E11D48",
+    "neutral_dark": "#0F172A",
+    "neutral_body": "#334155",
+    "neutral_muted": "#64748B",
+    "neutral_border": "#E2E8F0",
+    "neutral_bg": "#F8FAFC",
+    "card_bg": "#FFFFFF"
+  },
+  "typography": {
+    "heading_font": "Outfit, Satoshi, system-ui, sans-serif",
+    "body_font": "Plus Jakarta Sans, Inter, system-ui, sans-serif",
+    "mono_font": "JetBrains Mono, monospace",
+    "hierarchy": {
+      "h1_hero": "text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight",
+      "h2_section": "text-2xl sm:text-3xl font-bold tracking-tight text-slate-900",
+      "h3_block": "text-lg sm:text-xl font-semibold text-slate-900",
+      "body_text": "text-base text-slate-700 leading-relaxed",
+      "small_caption": "text-sm text-slate-500 font-medium",
+      "eyebrow_badge": "text-xs uppercase tracking-widest font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200"
+    }
+  },
+  "layout_and_spacing": {
+    "page_container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10 sm:space-y-14",
+    "grid_main_planner": "grid grid-cols-1 lg:grid-cols-12 gap-8 items-start",
+    "left_controls_col": "lg:col-span-5 space-y-6",
+    "right_results_col": "lg:col-span-7 space-y-6",
+    "bento_schedule_grid": "grid grid-cols-1 md:grid-cols-2 gap-5",
+    "padding_card": "p-5 sm:p-7",
+    "rounded_corners": "rounded-2xl"
+  },
+  "key_components": [
+    {
+      "name": "Header",
+      "description": "Sticky top bar with blurred light background, logo '5op.lt | Vitaminų ir papildų vartojimo Planuoklis', live status badge, and direct link to e-shop.",
+      "styles": "sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-xs",
+      "data_testids": {
+        "header": "header-nav",
+        "logo": "brand-logo-link",
+        "eshop_header_btn": "header-eshop-cta-button"
+      }
+    },
+    {
+      "name": "LegalDisclaimerBannerTop",
+      "description": "Prominent scientific & legal disclaimer banner placed near the top explaining educational nature, medical consultation need, and non-prescription guidance.",
+      "styles": "bg-amber-50/80 border-l-4 border-amber-500 p-4 rounded-r-xl text-amber-900 text-sm flex gap-3 items-start leading-relaxed shadow-xs",
+      "data_testids": {
+        "disclaimer_top": "legal-disclaimer-top-banner"
+      }
+    },
+    {
+      "name": "UserProfileBlock",
+      "description": "Interactive profile selector for Gender/Age category (Vyras, Moteris, Vaikas 6+) and digestive sensitivity toggle switch (Jautrus virškinimas).",
+      "styles": "bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4",
+      "data_testids": {
+        "gender_vyras": "profile-gender-male-btn",
+        "gender_moteris": "profile-gender-female-btn",
+        "gender_vaikas": "profile-gender-child-btn",
+        "sensitivity_toggle": "profile-sensitivity-switch"
+      }
+    },
+    {
+      "name": "SupplementSelectorCategories",
+      "description": "Two structured categories of scientific supplements (1. Baziniai & Sveikatos palaikymo / 2. Biohacking & Veiklos optimizavimo) with checkboxes + dynamic dose badges, plus a custom supplement input field with add button.",
+      "styles": "bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-6",
+      "data_testids": {
+        "category_1": "supplement-cat-basic-container",
+        "category_2": "supplement-cat-biohacking-container",
+        "checkbox_item": "supplement-checkbox-[id]",
+        "custom_input": "custom-supplement-text-input",
+        "custom_add_btn": "custom-supplement-add-button"
+      }
+    },
+    {
+      "name": "DynamicScheduleTimeline",
+      "description": "Time-blocked daily schedule cards (Rytas, Pietūs, Prieš treniruotę, Po treniruotės, Vakaras, Prieš miegą) with intake timing, calculated dosages, short PubMed rationale, and interactive 'Where to Buy / Partner Recommendation' card embedded in each timeline slot.",
+      "styles": "space-y-6",
+      "data_testids": {
+        "timeblock_card": "schedule-timeblock-[id]",
+        "partner_product_card": "partner-offer-card-[id]",
+        "partner_buy_link": "partner-buy-external-link-[id]"
+      }
+    },
+    {
+      "name": "ScientificInteractionWarnings",
+      "description": "Dynamic warning & synergy engine detecting interactions (e.g. Iron + Calcium competition, Zinc + Copper balance, Fat-soluble vitamins require meal, Caffeine timing conflict).",
+      "styles": "bg-rose-50/70 border border-rose-200/80 p-5 rounded-2xl space-y-3",
+      "data_testids": {
+        "warning_container": "scientific-interaction-warnings-block",
+        "warning_item": "interaction-warning-alert-item"
+      }
+    },
+    {
+      "name": "ExportAndShareActions",
+      "description": "Toolbar to download personalized plan as PNG/PDF or copy shareable link with encoded URL state parameters.",
+      "styles": "flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200",
+      "data_testids": {
+        "download_pdf_png": "export-schedule-download-btn",
+        "copy_share_link": "export-schedule-copy-link-btn"
+      }
+    },
+    {
+      "name": "ScientificSourcesBlock",
+      "description": "Accordion/Grid listing scientific literature, meta-analyses, PubMed links, and DOI references backing every supplement recommendation.",
+      "styles": "bg-white border border-slate-200 p-6 rounded-2xl shadow-sm space-y-4",
+      "data_testids": {
+        "sources_container": "scientific-sources-doi-block",
+        "doi_link": "pubmed-doi-reference-link"
+      }
+    },
+    {
+      "name": "PartnerAdSidebarPlaceholders",
+      "description": "Visually appealing placeholder cards for brand partners (e.g., '5op.lt Premium Omega-3', 'Magnesio Citratas High Absorption') with clear CTA buttons.",
+      "styles": "bg-gradient-to-b from-teal-50/50 to-emerald-50/50 border border-teal-200/60 p-5 rounded-2xl text-center space-y-3 shadow-xs",
+      "data_testids": {
+        "partner_banner_slot": "partner-sidebar-ad-placeholder"
+      }
+    },
+    {
+      "name": "Footer",
+      "description": "Footer with repeated legal disclaimer, partnership email partneryste@5op.lt, quick navigation links, and bright primary CTA button 'Apsilankyti el. parduotuvėje 5op.lt' to https://5op.lt.",
+      "styles": "bg-slate-900 text-slate-300 py-12 px-4 sm:px-8 space-y-8 rounded-t-3xl border-t border-slate-800",
+      "data_testids": {
+        "footer": "main-footer",
+        "footer_disclaimer": "legal-disclaimer-footer",
+        "footer_partner_email": "partnership-contact-email-link",
+        "footer_eshop_cta": "footer-eshop-bright-cta-btn"
+      }
+    }
+  ],
+  "image_urls": {
+    "supplement_hero_banner": "https://images.unsplash.com/photo-1707129785947-ddc627a8bab9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxzdXBwbGVtZW50cyUyMHZpdGFtaW5zJTIwYmlvaGFja2luZyUyMHdlbGxuZXNzJTIwaGVhbHRoeSUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3OTEzNTUzOTh8MA&ixlib=rb-4.1.0&q=85",
+    "clean_capsules_aesthetic": "https://images.unsplash.com/photo-1664956618021-73c47736845e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwyfHxzdXBwbGVtZW50cyUyMHZpdGFtaW5zJTIwYmlvaGFja2luZyUyMHdlbGxuZXNzJTIwaGVhbHRoeSUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3OTEzNTUzOTh8MA&ixlib=rb-4.1.0&q=85",
+    "vitamin_capsules_sun": "https://images.unsplash.com/photo-1729701028046-2bd5b736a6d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHw0fHxzdXBwbGVtZW50cyUyMHZpdGFtaW5zJTIwYmlvaGFja2luZyUyMHdlbGxuZXNzJTIwaGVhbHRoeSUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3OTEzNTUzOTh8MA&ixlib=rb-4.1.0&q=85",
+    "wellness_holding_bottle": "https://images.unsplash.com/photo-1559087316-6b27308e53f6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwzfHxzdXBwbGVtZW50cyUyMHZpdGFtaW5zJTIwYmlvaGFja2luZyUyMHdlbGxuZXNzJTIwaGVhbHRoeSUyMGxpZmVzdHlsZXxlbnwwfHx8fDE3OTEzNTUzOTh8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "micro_interactions": {
+    "hover_effects": "hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 ease-out",
+    "button_press": "active:scale-95 transition-transform duration-150",
+    "card_toggle_active": "ring-2 ring-teal-600 border-teal-500 bg-teal-50/30",
+    "badge_glow": "shadow-[0_0_12px_rgba(13,148,136,0.2)]"
+  },
+  "instructions_to_main_agent": [
+    "Build the complete single-page application in Lithuanian for 5op.lt brand with full interactive state.",
+    "Implement profile selection (Vyras, Moteris, Vaikas 6+) and digestive sensitivity toggle with real-time recalculation of recommended daily dosages and intake schedules.",
+    "Include at least 10 popular supplements divided into 2 scientific categories (e.g. 1. Baziniai: Vitaminas D3+K2, Magnis, Omega-3, Geležis, Vitaminas C, B kompleksas; 2. Biohacking & Veiklos: Ashwagandha, Creatine, L-Theanine, Zinc + Copper, CoQ10) plus a working custom supplement input.",
+    "Display detailed daily timeline split into 6 clear time blocks (Rytas, Pietūs, Prieš treniruotę, Po treniruotės, Vakaras, Prieš miegą) with scientific timing, dose, stomach rules (su maistu / tuščiu skrandžiu), and short rationale.",
+    "Render partner product recommendations cards with link placeholders pointing to 5op.lt e-shop.",
+    "Provide PDF/PNG printable/downloadable summary view and Copy shareable link functionality using URL query search params.",
+    "Include scientific interaction warning alerts (e.g. alert when Iron and Calcium or Zinc and Magnesium are selected in conflicting time slots).",
+    "Render scientific references section with realistic PubMed links/DOIs.",
+    "Ensure all interactive elements have data-testid attributes.",
+    "Adhere strictly to light minimalist biohacking theme with high contrast readability and clean spacing."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Avoid centered text body layouts; keep content left-aligned for natural reading.",
+    "Use layered subtle shadows and crisp 1px borders for clean depth.",
+    "Never use generic AI emojis like 🤖 or 💡 inside icons; use Lucide-react or Phosphor icons.",
+    "Ensure total color contrast compliance (APCA/WCAG AA) against light backgrounds.",
+    "Ensure responsive design from 320px mobile up to 1440px+ ultra-wide screens."
+  ]
+}
