@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only smoke test for Lithuanian supplement planner (5op.lt). 11/12 checks passed. All core flows (profile dose updates, child blocks, sensitivity-switch, dynamic schedule, warnings, custom supplement, copy link with ?p= param, PNG download, sources/footer links) work. Shared-URL restore after full reload showed defaults instead of saved state in one check - likely minor timing/URL race but should be verified.",
+  "tested_scope": ["frontend", "integration"],
+  "passed": [
+    "Page loads with header, hero, top legal disclaimer banner",
+    "Moteris profile -> Geležis dose badge shows '18 mg'",
+    "Vyras profile -> Geležis dose badge shows 'Tik esant deficitui'",
+    "Vaikas profile -> Kofeinas/Ashwagandha/Kreatinas/Beta-Alaninas show 'Nerekomenduojama vaikams'",
+    "Interaction warnings render dynamically: Geležis+Kalcis + Kofeino laikas (3 warnings total)",
+    "Schedule-timeblock-rytas populated with selected supplements (Geležis)",
+    "Sensitivity switch ON -> irritants display 'Būtinai PO maisto' in schedule",
+    "Custom supplement add (name+dose+block) appears in rytas schedule",
+    "Copy-link button writes URL with ?p= query param and shows 'Nuoroda nukopijuota!' toast",
+    "Download dropdown opens with PDF+PNG items; PNG export triggers download of 5op-planuoklis.png (html2canvas-pro works, no JS errors)",
+    "7 PubMed/DOI reference links; partnership mailto=partneryste@5op.lt; footer e-shop CTA -> https://5op.lt"
+  ],
+  "failed": [
+    {
+      "area": "URL state restoration",
+      "issue": "After navigating to copied shared URL and full reload, schedule shows only default d3k2 (not the custom item 'Mano testas', not Geležis, not sensitivity-ON state). Expected previously selected state to be restored from ?p= param.",
+      "evidence": "After page.goto(sharedUrl) rytas block contained only 'Vitaminas D3 + K2 · Su maistu' instead of restored custom+gelezis+'Būtinai PO maisto'.",
+      "priority": "MEDIUM"
+    }
+  ],
+  "action_items": [
+    "Investigate URL encode/decode round-trip: verify ?p= in copied URL actually encodes current state at time of copy (potential race between replaceState useEffect and copyLink reading window.location.href). Consider computing URL synchronously inside copyLink() rather than relying on history.replaceState side-effect."
+  ],
+  "success_rate": {"backend": "N/A (skipped per request)", "frontend": "92%"},
+  "retest_needed": true,
+  "full_testing_deferred": true
+}

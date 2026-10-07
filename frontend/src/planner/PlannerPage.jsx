@@ -49,38 +49,37 @@ const PROFILES = [
   { id: "vaikas", label: "Vaikas (nuo 6 m.)", icon: Baby },
 ];
 
+function readInitial() {
+  const p = new URLSearchParams(window.location.search).get("p");
+  const s = p ? decodeState(p) : null;
+  return {
+    profile: s?.profile ?? "vyras",
+    sensitive: typeof s?.sensitive === "boolean" ? s.sensitive : false,
+    selected: Array.isArray(s?.selected) ? s.selected : ["d3k2", "omega3", "magnis-glicinatas"],
+    custom: Array.isArray(s?.custom) ? s.custom : [],
+  };
+}
+
 export default function PlannerPage() {
-  const [profile, setProfile] = useState("vyras");
-  const [sensitive, setSensitive] = useState(false);
-  const [selected, setSelected] = useState(["d3k2", "omega3", "magnis-glicinatas"]);
-  const [custom, setCustom] = useState([]);
+  const init = useRef(readInitial()).current;
+  const [profile, setProfile] = useState(init.profile);
+  const [sensitive, setSensitive] = useState(init.sensitive);
+  const [selected, setSelected] = useState(init.selected);
+  const [custom, setCustom] = useState(init.custom);
   const [cName, setCName] = useState("");
   const [cDose, setCDose] = useState("");
   const [cBlock, setCBlock] = useState("rytas");
   const captureRef = useRef(null);
-  const loaded = useRef(false);
 
-  // Load from URL
-  useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get("p");
-    if (p) {
-      const s = decodeState(p);
-      if (s) {
-        if (s.profile) setProfile(s.profile);
-        if (typeof s.sensitive === "boolean") setSensitive(s.sensitive);
-        if (Array.isArray(s.selected)) setSelected(s.selected);
-        if (Array.isArray(s.custom)) setCustom(s.custom);
-      }
-    }
-    loaded.current = true;
-  }, []);
+  const buildShareUrl = () => {
+    const code = encodeState({ profile, sensitive, selected, custom });
+    return `${window.location.origin}${window.location.pathname}?p=${code}`;
+  };
 
   // Sync to URL
   useEffect(() => {
-    if (!loaded.current) return;
     const code = encodeState({ profile, sensitive, selected, custom });
-    const url = `${window.location.pathname}?p=${code}`;
-    window.history.replaceState(null, "", url);
+    window.history.replaceState(null, "", `${window.location.pathname}?p=${code}`);
   }, [profile, sensitive, selected, custom]);
 
   const toggle = (id) =>
@@ -123,7 +122,7 @@ export default function PlannerPage() {
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(buildShareUrl());
       toast.success("Nuoroda nukopijuota!");
     } catch {
       toast.error("Nepavyko nukopijuoti nuorodos");
