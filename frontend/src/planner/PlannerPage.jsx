@@ -571,7 +571,7 @@ export default function PlannerPage() {
                   </a>
                 </div>
               ))}
-              <p className="text-[11px] text-slate-400 px-1">Reklaminė vieta partneriams — susisiekite: partneryste@5op.lt</p>
+              <p className="text-[11px] text-slate-400 px-1">Reklaminė vieta — susisiekite: info@5op.lt</p>
             </section>
           </div>
 
