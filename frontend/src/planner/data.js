@@ -289,8 +289,38 @@ export const TIER_MAP = {
 };
 
 export const TIERS = {
+  0: { label: "Neklasifikuota", emoji: "⚪", desc: "Jūsų pridėtas papildas – įrodymų lygis neįvertintas. Rekomenduojame pasidomėti tyrimais." },
   1: { label: "Svarbiausi", emoji: "🟢", desc: "Tvirtas mokslinis pagrindas ir nauda daugeliui žmonių. Puikus atspirties taškas." },
   2: { label: "Moksliškai pagrįsti", emoji: "🟡", desc: "Gerai ištirti ir veiksmingi siekiant konkretaus tikslo (sportas, miegas, imunitetas)." },
   3: { label: "Eksperimentiniai", emoji: "🟠", desc: "Perspektyvūs, bet įrodymai dar riboti ar nevienareikšmiai (ilgaamžiškumas, adaptogenai)." },
   4: { label: "Mažai veiksmingi / pervertinti", emoji: "🔴", desc: "Silpni įrodymai arba dažnai pervertinti – sveikiems žmonėms nauda abejotina." },
 };
+
+// Evidence tier for custom (free-typed) supplements, keyed by lowercased name.
+const CUSTOM_TIER = {
+  "vitaminas d3": 1, "vitaminas d3 + k2": 1, "omega-3 (epa/dha)": 1,
+  "magnis (bisglicinatas)": 1, "magnis (citratas)": 1, "geležis (bisglicinatas)": 1,
+  "kreatino monohidratas": 1, "vitaminas b12 (metilkobalaminas)": 1, "folio rūgštis (b9 / metilfolatas)": 1,
+  "cinkas (pikolinatas)": 2, "vitaminas c": 2, "kalcis": 2, "melatoninas": 2,
+  "l-citrulinas / malatas": 2, "kofeinas": 2, "beta-alaninas": 2, "l-theanine": 2,
+  "elektrolitai (na/k/mg)": 2, "vitaminas k2 (mk-7)": 2, "jodas": 2, "selenas": 2,
+  "kreatinas hcl": 2, "betainas (tmg)": 2, "vitaminas a (retinolis)": 2, "vitaminas e": 2,
+  "vitaminas b6 (p-5-p)": 2, "bcaa": 2, "eaa (nepakeičiamos aminorūgštys)": 2, "l-glutaminas": 2,
+  "hmb": 2, "kalis": 2,
+  "nmn (nikotinamido mononukleotidas)": 3, "resveratrolis": 3, "q10 (ubikinolis)": 3,
+  "ašvaganda (ashwagandha ksm-66)": 3, "rodžiolė (rhodiola)": 3, "bakopa (bacopa monnieri)": 3,
+  "lion's mane (ožkabarzdis)": 3, "kurkuminas": 3, "berberinas": 3, "alfa lipoinė rūgštis (ala)": 3,
+  "acetil-l-karnitinas (alcar)": 3, "l-karnitinas": 3, "taurinas": 3, "spirulina": 3, "chlorella": 3,
+  "kolagenas": 3, "probiotikai": 3, "prebiotikai (inulinas)": 3, "fosfatidilserinas": 3, "gaba": 3,
+  "5-htp": 3, "glicinas": 3, "l-tirozinas": 3, "inozitolis": 3, "astaksantinas": 3,
+  "liuteinas + zeaksantinas": 3, "fisetinas": 3, "beta-gliukanai": 3, "kvercetinas": 3,
+  "alfa-gpc (kolinas)": 3, "agmatino sulfatas": 3, "melisa (lemon balm)": 3, "valerijonas": 3,
+  "maca": 3, "boras": 3, "ginkmedis (ginkgo biloba)": 3, "hialurono rūgštis": 3, "mct aliejus": 3,
+  "chromas (pikolinatas)": 3, "varis": 3, "manganas": 3, "molibdenas": 3, "psyllium (skaidulos)": 3,
+  "vitaminas b1 (tiaminas)": 4, "vitaminas b2 (riboflavinas)": 4, "vitaminas b5 (pantoteno r.)": 4,
+  "biotinas (b7)": 4, "niacinas (b3)": 4, "saulėgrąžų lecitinas": 4,
+};
+
+export function tierForName(name) {
+  return CUSTOM_TIER[name.trim().toLowerCase()] ?? 0;
+}

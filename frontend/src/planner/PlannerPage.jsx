@@ -16,17 +16,18 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact,
+  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact, tierForName,
   doseFor, stomachText, getWarnings,
 } from "@/planner/data";
 
 const TIER_STYLES = {
+  0: "text-slate-600 bg-slate-100 border-slate-300",
   1: "text-emerald-700 bg-emerald-50 border-emerald-200",
   2: "text-yellow-700 bg-yellow-50 border-yellow-200",
   3: "text-orange-700 bg-orange-50 border-orange-200",
   4: "text-rose-700 bg-rose-50 border-rose-200",
 };
-const TIER_DOT = { 1: "bg-emerald-500", 2: "bg-yellow-500", 3: "bg-orange-500", 4: "bg-rose-500" };
+const TIER_DOT = { 0: "bg-slate-400", 1: "bg-emerald-500", 2: "bg-yellow-500", 3: "bg-orange-500", 4: "bg-rose-500" };
 
 const ICONS = { Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble };
 
@@ -99,7 +100,7 @@ export default function PlannerPage() {
       toast.error("Įveskite papildo pavadinimą");
       return;
     }
-    setCustom((prev) => [...prev, { id: `c-${Date.now()}`, name: cName.trim(), dose: cDose.trim(), block: cBlock }]);
+    setCustom((prev) => [...prev, { id: `c-${Date.now()}`, name: cName.trim(), dose: cDose.trim(), block: cBlock, tier: tierForName(cName) }]);
     setCName("");
     setCDose("");
     setShowSug(false);
@@ -148,7 +149,7 @@ export default function PlannerPage() {
     }
     for (const c of custom) {
       if (!map[c.block]) continue;
-      map[c.block].push({ key: c.id, name: c.name, dose: c.dose || "—", note: "Jūsų pridėtas papildas.", stomach: "Pagal etiketę", isCustom: true });
+      map[c.block].push({ key: c.id, name: c.name, dose: c.dose || "—", note: "Jūsų pridėtas papildas.", stomach: "Pagal etiketę", isCustom: true, tier: c.tier ?? tierForName(c.name) });
     }
     return map;
   }, [selected, custom, profile, sensitive]);
@@ -468,14 +469,28 @@ export default function PlannerPage() {
                 </Button>
                 {custom.length > 0 && (
                   <ul className="space-y-1.5">
-                    {custom.map((c) => (
-                      <li key={c.id} className="flex items-center justify-between text-sm bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">
-                        <span className="truncate"><b>{c.name}</b> {c.dose && `· ${c.dose}`}</span>
-                        <button data-testid={`custom-remove-${c.id}`} onClick={() => setCustom((p) => p.filter((x) => x.id !== c.id))} className="text-rose-500 hover:text-rose-700 shrink-0 ml-2">
+                    {custom.map((c) => {
+                      const ct = c.tier ?? tierForName(c.name);
+                      return (
+                      <li key={c.id} className="flex items-center justify-between gap-2 text-sm bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">
+                        <span className="min-w-0 flex-1">
+                          <span className="flex items-center gap-2">
+                            <b className="truncate">{c.name}</b> {c.dose && <span className="text-slate-500 shrink-0">· {c.dose}</span>}
+                          </span>
+                          <span
+                            data-testid={`custom-tier-badge-${c.id}`}
+                            title={TIERS[ct].label}
+                            className={`mt-1 inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[ct]}`}
+                          >
+                            <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[ct]}`} /> {TIERS[ct].label}
+                          </span>
+                        </span>
+                        <button data-testid={`custom-remove-${c.id}`} onClick={() => setCustom((p) => p.filter((x) => x.id !== c.id))} className="text-rose-500 hover:text-rose-700 shrink-0">
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </li>
-                    ))}
+                      );
+                    })}
                   </ul>
                 )}
               </div>
@@ -586,12 +601,22 @@ export default function PlannerPage() {
                             </span>
                           </div>
                           <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
-                          {!item.isCustom && (
-                            <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`}
-                              className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
-                              <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
-                            </a>
-                          )}
+                          <div className="mt-2 flex items-center gap-2 flex-wrap">
+                            {item.isCustom ? (
+                              <span
+                                data-testid={`schedule-tier-badge-${item.key}`}
+                                title={TIERS[item.tier].label}
+                                className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
+                              >
+                                <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
+                              </span>
+                            ) : (
+                              <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`}
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
+                                <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
+                              </a>
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>
