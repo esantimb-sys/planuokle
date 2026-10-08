@@ -16,9 +16,17 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, searchCustomDb, findCustomExact,
+  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact,
   doseFor, stomachText, getWarnings,
 } from "@/planner/data";
+
+const TIER_STYLES = {
+  1: "text-emerald-700 bg-emerald-50 border-emerald-200",
+  2: "text-yellow-700 bg-yellow-50 border-yellow-200",
+  3: "text-orange-700 bg-orange-50 border-orange-200",
+  4: "text-rose-700 bg-rose-50 border-rose-200",
+};
+const TIER_DOT = { 1: "bg-emerald-500", 2: "bg-yellow-500", 3: "bg-orange-500", 4: "bg-rose-500" };
 
 const ICONS = { Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble };
 
@@ -317,6 +325,23 @@ export default function PlannerPage() {
                 </button>
               </div>
 
+              <div
+                data-testid="evidence-tier-legend"
+                className="rounded-xl bg-slate-50 border border-slate-200 p-3.5 space-y-2"
+              >
+                <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Įrodymų lygiai (pagal meta-analizes)</p>
+                <div className="grid gap-1.5">
+                  {[1, 2, 3, 4].map((t) => (
+                    <div key={t} className="flex items-start gap-2">
+                      <span className={`mt-1 h-2.5 w-2.5 rounded-full shrink-0 ${TIER_DOT[t]}`} />
+                      <p className="text-[11px] text-slate-600 leading-snug">
+                        <b className="text-slate-800">{TIERS[t].label}:</b> {TIERS[t].desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
               {[1, 2].map((cat) => (
                 <div key={cat} data-testid={cat === 1 ? "supplement-cat-basic-container" : "supplement-cat-biohacking-container"} className="space-y-2.5">
                   <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">{CATEGORIES[cat]}</h3>
@@ -350,18 +375,27 @@ export default function PlannerPage() {
                               <Clock className="h-3 w-3" /> {dose} · {profileLabel}
                             </span>
                           )}
-                          {active && REFS[s.id] && (
-                            <a
-                              href={REFS[s.id]}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              data-testid={`supplement-ref-link-${s.id}`}
-                              onClick={(e) => e.stopPropagation()}
-                              className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+                          <span className="mt-1.5 flex items-center gap-2 flex-wrap">
+                            <span
+                              data-testid={`supplement-tier-badge-${s.id}`}
+                              title={TIERS[TIER_MAP[s.id]].label}
+                              className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[TIER_MAP[s.id]]}`}
                             >
-                              <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
-                            </a>
-                          )}
+                              <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[TIER_MAP[s.id]]}`} /> {TIERS[TIER_MAP[s.id]].label}
+                            </span>
+                            {active && REFS[s.id] && (
+                              <a
+                                href={REFS[s.id]}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                data-testid={`supplement-ref-link-${s.id}`}
+                                onClick={(e) => e.stopPropagation()}
+                                className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+                              >
+                                <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                              </a>
+                            )}
+                          </span>
                         </span>
                       </label>
                     );

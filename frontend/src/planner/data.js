@@ -278,3 +278,19 @@ export function findCustomExact(query) {
   const q = query.trim().toLowerCase();
   return CUSTOM_DB.find((x) => x.name.toLowerCase() === q) || null;
 }
+
+// Evidence-based categorization (4 tiers) per standard supplement.
+export const TIER_MAP = {
+  "magnis-glicinatas": 1, "magnis-malatas": 3, "gelezis": 1, "d3k2": 1, "cinkas": 2,
+  "b-kompleksas": 2, "omega3": 1, "vitc": 2, "kalcis": 2, "probiotikai": 3,
+  "silimarinas": 3, "msm": 4, "q10": 3, "melatoninas": 2, "multivitaminai": 4,
+  "kreatinas": 1, "baltymas": 1, "citrulinas": 2, "kofeinas": 2, "elektrolitai": 2,
+  "beta-alaninas": 2, "taurinas": 3, "ltheanine": 2, "ashwagandha": 3,
+};
+
+export const TIERS = {
+  1: { label: "Svarbiausi", emoji: "🟢", desc: "Tvirtas mokslinis pagrindas ir nauda daugeliui žmonių. Puikus atspirties taškas." },
+  2: { label: "Moksliškai pagrįsti", emoji: "🟡", desc: "Gerai ištirti ir veiksmingi siekiant konkretaus tikslo (sportas, miegas, imunitetas)." },
+  3: { label: "Eksperimentiniai", emoji: "🟠", desc: "Perspektyvūs, bet įrodymai dar riboti ar nevienareikšmiai (ilgaamžiškumas, adaptogenai)." },
+  4: { label: "Mažai veiksmingi / pervertinti", emoji: "🔴", desc: "Silpni įrodymai arba dažnai pervertinti – sveikiems žmonėms nauda abejotina." },
+};
