@@ -733,11 +733,11 @@ export default function PlannerPage() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
                 <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
               </div>
-              <p className="text-sm text-slate-400 leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
             </div>
             <div>
               <h4 className="font-heading font-bold text-white mb-3">Partnerystė</h4>
-              <p className="text-sm text-slate-400 leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
               <a data-testid="partnership-contact-email-link" href="mailto:partneryste@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
                 <Mail className="h-4 w-4" /> partneryste@5op.lt
               </a>
@@ -755,10 +755,10 @@ export default function PlannerPage() {
               </a>
             </div>
           </div>
-          <div data-testid="legal-disclaimer-footer" className="border-t border-slate-800 pt-6 text-xs text-slate-500 leading-relaxed">
+          <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
             {DISCLAIMER}
           </div>
-          <p className="text-xs text-slate-600">© {new Date().getFullYear()} 5op.lt · Visos teisės saugomos.</p>
+          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt · Visos teisės saugomos.</p>
         </div>
       </footer>
     </div>
