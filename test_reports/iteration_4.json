@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend-only re-audit of evidence-tier classification. Verified standard supplement tier badges (kreatinas/d3k2/omega3=Svarbiausi, magnis-malatas/melatoninas=Moksliškai pagrįsti, msm/multivitaminai=Mažai veiksmingi / pervertinti, ashwagandha=Eksperimentiniai) and custom supplement tiers after autocomplete pick+add (BCAA/Vitaminas E/Resveratrolis/GABA=Mažai veiksmingi, Berberinas/Psyllium=Moksliškai pagrįsti, L-Glutaminas/HMB=Eksperimentiniai). Unknown free-typed 'Mano zoliu arbata' shows Neklasifikuota. 'Mokslinis tyrimas' links point to English PubMed queries. Evidence-tier legend visible. No console errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "PlannerPage.jsx is 711 lines — consider splitting into subcomponents (SupplementList, CustomAdd, Schedule) for maintainability.",
+    "CUSTOM_TIER is case-sensitive via lowercased key; relies on exact spelling in Lithuanian including diacritics. Robust but fragile for user typos — current fallback to tier 0 is correct."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All 8 standard + 8 custom tier assertions pass. PubMed links verified for Berberinas, Psyllium, Resveratrolis, GABA, L-Glutaminas, HMB (contain English terms). BCAA/Vitaminas E PubMed URLs are correct (branched-chain amino acids / vitamin E) — only my initial substring check failed due to URL encoding (%20 vs space); product is correct. Unknown input yields Neklasifikuota gray badge. 0 console errors on load + add."
+}
