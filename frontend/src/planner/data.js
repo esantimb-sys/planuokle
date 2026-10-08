@@ -305,7 +305,7 @@ const CUSTOM_TIER = {
   "l-citrulinas / malatas": 2, "kofeinas": 2, "beta-alaninas": 2, "l-theanine": 2,
   "elektrolitai (na/k/mg)": 2, "vitaminas k2 (mk-7)": 2, "jodas": 2, "selenas": 2,
   "kreatinas hcl": 2, "betainas (tmg)": 2, "vitaminas a (retinolis)": 2, "vitaminas e": 2,
-  "vitaminas b6 (p-5-p)": 2, "bcaa": 2, "eaa (nepakeičiamos aminorūgštys)": 2, "l-glutaminas": 2,
+  "vitaminas b6 (p-5-p)": 2, "bcaa": 4, "eaa (nepakeičiamos aminorūgštys)": 2, "l-glutaminas": 2,
   "hmb": 2, "kalis": 2,
   "nmn (nikotinamido mononukleotidas)": 3, "resveratrolis": 3, "q10 (ubikinolis)": 3,
   "ašvaganda (ashwagandha ksm-66)": 3, "rodžiolė (rhodiola)": 3, "bakopa (bacopa monnieri)": 3,
