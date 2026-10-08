@@ -758,7 +758,7 @@ export default function PlannerPage() {
           <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
             {DISCLAIMER}
           </div>
-          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt · Elektroninė parduotuvė All rights reserved.</p>
+          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt · All rights reserved.</p>
         </div>
       </footer>
     </div>
