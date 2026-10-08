@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import {
   Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble, FlaskConical, ShieldAlert,
   Download, Link2, Plus, Trash2, ExternalLink, Mars, Venus, Baby, Leaf, Clock,
-  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles,
+  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles, X,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -181,6 +181,12 @@ export default function PlannerPage() {
     } catch {
       toast.error("Nepavyko nukopijuoti nuorodos");
     }
+  };
+
+  const removeFromSchedule = (item) => {
+    if (item.isCustom) setCustom((p) => p.filter((x) => x.id !== item.key));
+    else setSelected((p) => p.filter((id) => id !== item.key));
+    toast.success("Papildas pašalintas iš grafiko");
   };
 
   const exportAs = async (type) => {
@@ -638,10 +644,21 @@ export default function PlannerPage() {
                     </div>
                     <div className="divide-y divide-slate-100">
                       {schedule[b.id].map((item) => (
-                        <div key={item.key} className="px-4 py-3.5">
+                        <div key={item.key} className="px-4 py-3.5 group/item">
                           <div className="flex items-start justify-between gap-3">
                             <p className="font-semibold text-slate-800 text-sm">{item.name}</p>
-                            <span className="shrink-0 text-xs font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2 py-0.5 rounded-full">{item.dose}</span>
+                            <div className="flex items-center gap-2 shrink-0">
+                              <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2 py-0.5 rounded-full">{item.dose}</span>
+                              <button
+                                data-testid={`schedule-remove-${item.key}`}
+                                onClick={() => removeFromSchedule(item)}
+                                title="Pašalinti iš grafiko"
+                                aria-label="Pašalinti iš grafiko"
+                                className="flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+                            </div>
                           </div>
                           <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
                             <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-medium">
