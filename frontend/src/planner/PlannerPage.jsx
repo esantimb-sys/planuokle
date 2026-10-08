@@ -16,7 +16,7 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact, tierForName, pubmedUrl,
+  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact, tierForName, pubmedUrl, noteForName,
   doseFor, stomachText, getWarnings,
 } from "@/planner/data";
 
@@ -149,7 +149,7 @@ export default function PlannerPage() {
     }
     for (const c of custom) {
       if (!map[c.block]) continue;
-      map[c.block].push({ key: c.id, name: c.name, dose: c.dose || "—", note: "Jūsų pridėtas papildas.", stomach: "Pagal etiketę", isCustom: true, tier: c.tier ?? tierForName(c.name) });
+      map[c.block].push({ key: c.id, name: c.name, dose: c.dose || "—", note: noteForName(c.name), stomach: "Pagal etiketę", isCustom: true, tier: c.tier ?? tierForName(c.name) });
     }
     return map;
   }, [selected, custom, profile, sensitive]);
