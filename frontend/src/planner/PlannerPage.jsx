@@ -725,7 +725,7 @@ export default function PlannerPage() {
       </main>
 
       {/* Footer */}
-      <footer data-testid="main-footer" className="bg-slate-900 text-slate-300 mt-10 rounded-t-3xl">
+      <footer data-testid="main-footer" className="bg-[#1F1F1F] text-[#CDCDCD] mt-10 rounded-t-3xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-8">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
