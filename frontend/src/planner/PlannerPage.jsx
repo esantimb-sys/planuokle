@@ -19,6 +19,8 @@ import {
   SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact, tierForName, pubmedUrl, noteForName,
   doseFor, stomachText, getWarnings,
 } from "@/planner/data";
+import dejavuRegularUrl from "@/planner/fonts/DejaVuSans.ttf?url";
+import dejavuBoldUrl from "@/planner/fonts/DejaVuSans-Bold.ttf?url";
 
 const TIER_STYLES = {
   0: "text-slate-600 bg-slate-100 border-slate-300",
@@ -28,6 +30,22 @@ const TIER_STYLES = {
   4: "text-rose-700 bg-rose-50 border-rose-200",
 };
 const TIER_DOT = { 0: "bg-slate-400", 1: "bg-emerald-500", 2: "bg-yellow-500", 3: "bg-orange-500", 4: "bg-rose-500" };
+
+let _pdfFontsPromise = null;
+async function _ttfToBase64(url) {
+  const buf = await (await fetch(url)).arrayBuffer();
+  const bytes = new Uint8Array(buf);
+  let bin = "";
+  const chunk = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunk) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+  return btoa(bin);
+}
+function loadPdfFonts() {
+  if (!_pdfFontsPromise) {
+    _pdfFontsPromise = Promise.all([_ttfToBase64(dejavuRegularUrl), _ttfToBase64(dejavuBoldUrl)]).then(([reg, bold]) => ({ reg, bold }));
+  }
+  return _pdfFontsPromise;
+}
 
 const ICONS = { Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble };
 
@@ -169,30 +187,51 @@ export default function PlannerPage() {
     if (!captureRef.current) return;
     const t = toast.loading("Ruošiamas grafikas...");
     try {
-      const { default: html2canvas } = await import("html2canvas-pro");
-      const canvas = await html2canvas(captureRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
       if (type === "png") {
+        const { default: html2canvas } = await import("html2canvas-pro");
+        const canvas = await html2canvas(captureRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
         const link = document.createElement("a");
         link.download = "5op-planuoklis.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
       } else {
         const { default: jsPDF } = await import("jspdf");
-        const img = canvas.toDataURL("image/png");
+        const fonts = await loadPdfFonts();
         const pdf = new jsPDF("p", "mm", "a4");
-        const pageW = 210;
-        const pageH = 297;
-        const imgH = (canvas.height * pageW) / canvas.width;
-        let heightLeft = imgH;
-        let position = 0;
-        pdf.addImage(img, "PNG", 0, position, pageW, imgH);
-        heightLeft -= pageH;
-        while (heightLeft > 0) {
-          position -= pageH;
-          pdf.addPage();
-          pdf.addImage(img, "PNG", 0, position, pageW, imgH);
-          heightLeft -= pageH;
+        pdf.addFileToVFS("DejaVuSans.ttf", fonts.reg);
+        pdf.addFont("DejaVuSans.ttf", "Dejavu", "normal");
+        pdf.addFileToVFS("DejaVuSans-Bold.ttf", fonts.bold);
+        pdf.addFont("DejaVuSans-Bold.ttf", "Dejavu", "bold");
+        const M = 15, PW = 210, PH = 297, maxW = PW - 2 * M;
+        let y = M + 2;
+        const ensure = (h) => { if (y + h > PH - M) { pdf.addPage(); y = M; } };
+        pdf.setFont("Dejavu", "bold"); pdf.setFontSize(17); pdf.setTextColor(13, 148, 136);
+        pdf.text("5op.lt — Papildų vartojimo planas", M, y); y += 11;
+        pdf.setFont("Dejavu", "normal"); pdf.setFontSize(11); pdf.setTextColor(71, 85, 105);
+        pdf.text(`Profilis: ${profileLabel}${sensitive ? " · Jautrus virškinimas" : ""}`, M, y); y += 9;
+        if (activeBlocks.length === 0) { pdf.text("Nepasirinkta jokių papildų.", M, y); y += 8; }
+        for (const b of activeBlocks) {
+          ensure(13);
+          pdf.setFillColor(236, 253, 245); pdf.rect(M, y - 5, maxW, 8, "F");
+          pdf.setFont("Dejavu", "bold"); pdf.setFontSize(12); pdf.setTextColor(15, 23, 42);
+          pdf.text(`${b.label}  (${b.time})`, M + 2, y); y += 9;
+          for (const it of schedule[b.id]) {
+            pdf.setFont("Dejavu", "bold"); pdf.setFontSize(10); pdf.setTextColor(15, 23, 42);
+            const head = pdf.splitTextToSize(`• ${it.name} — ${it.dose}  [${it.stomach}]`, maxW - 3);
+            ensure(head.length * 5 + 2);
+            pdf.text(head, M + 2, y); y += head.length * 5;
+            pdf.setFont("Dejavu", "normal"); pdf.setFontSize(9); pdf.setTextColor(100, 116, 139);
+            const note = pdf.splitTextToSize(it.note, maxW - 6);
+            ensure(note.length * 4.5 + 3);
+            pdf.text(note, M + 5, y); y += note.length * 4.5 + 3;
+          }
+          y += 3;
         }
+        ensure(22);
+        pdf.setDrawColor(226, 232, 240); pdf.line(M, y, PW - M, y); y += 5;
+        pdf.setFont("Dejavu", "normal"); pdf.setFontSize(7.5); pdf.setTextColor(120, 120, 120);
+        const disc = pdf.splitTextToSize("Tik informaciniais ir šviečiamaisiais tikslais. Tai nėra medicininė konsultacija — prieš vartojant maisto papildus pasitarkite su gydytoju. Šaltinis: 5op.lt", maxW);
+        pdf.text(disc, M, y);
         pdf.save("5op-planuoklis.pdf");
       }
       toast.success("Grafikas atsisiųstas", { id: t });
