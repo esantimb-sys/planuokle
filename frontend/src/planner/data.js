@@ -326,6 +326,53 @@ export function tierForName(name) {
 }
 
 export function pubmedUrl(name) {
-  const clean = name.replace(/\(.*?\)/g, "").replace(/\/.*/, "").trim() || name.trim();
-  return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(clean + " meta-analysis")}`;
+  const lower = name.trim().toLowerCase();
+  const cleaned = lower.replace(/\(.*?\)/g, "").replace(/\/.*/, "").trim();
+  const term = EN_NAME[lower] || EN_NAME[cleaned] || (name.replace(/\(.*?\)/g, "").replace(/\/.*/, "").trim() || name.trim());
+  return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(term + " meta-analysis")}`;
 }
+
+// Lithuanian -> English search terms so PubMed (English) returns results.
+const EN_NAME = {
+  "selenas": "selenium", "berberinas": "berberine", "spirulina": "spirulina", "chlorella": "chlorella",
+  "lion's mane (ožkabarzdis)": "lion's mane hericium erinaceus", "lion's mane": "lion's mane hericium erinaceus",
+  "nmn (nikotinamido mononukleotidas)": "nicotinamide mononucleotide", "nmn": "nicotinamide mononucleotide",
+  "q10 (ubikinolis)": "coenzyme Q10 ubiquinol", "q10": "coenzyme Q10",
+  "l-glutaminas": "l-glutamine", "glutaminas": "glutamine",
+  "omega-3 (epa/dha)": "omega-3 EPA DHA", "omega-3": "omega-3 fatty acids", "omega": "omega-3 fatty acids",
+  "vitaminas a (retinolis)": "vitamin A retinol", "vitaminas e": "vitamin E",
+  "vitaminas k2 (mk-7)": "vitamin K2 MK-7", "vitaminas d3": "vitamin D3", "vitaminas d3 + k2": "vitamin D3 K2",
+  "vitaminas d": "vitamin D", "vitaminas c": "vitamin C",
+  "vitaminas b1 (tiaminas)": "thiamine", "vitaminas b2 (riboflavinas)": "riboflavin",
+  "vitaminas b5 (pantoteno r.)": "pantothenic acid", "vitaminas b6 (p-5-p)": "vitamin B6",
+  "vitaminas b12 (metilkobalaminas)": "vitamin B12 methylcobalamin", "vitaminas b12": "vitamin B12",
+  "folio rūgštis (b9 / metilfolatas)": "folate folic acid", "folio rūgštis": "folate",
+  "biotinas (b7)": "biotin", "biotinas": "biotin", "niacinas (b3)": "niacin", "niacinas": "niacin",
+  "jodas": "iodine", "chromas (pikolinatas)": "chromium picolinate", "chromas": "chromium",
+  "varis": "copper supplementation", "manganas": "manganese supplementation", "molibdenas": "molybdenum",
+  "boras": "boron supplementation", "kalis": "potassium supplementation",
+  "magnis (bisglicinatas)": "magnesium bisglycinate", "magnis (citratas)": "magnesium citrate", "magnis": "magnesium",
+  "cinkas (pikolinatas)": "zinc", "cinkas": "zinc",
+  "geležis (bisglicinatas)": "iron bisglycinate", "geležis": "iron supplementation",
+  "kalcis": "calcium", "fosfatidilserinas": "phosphatidylserine", "kvercetinas": "quercetin",
+  "resveratrolis": "resveratrol", "kurkuminas": "curcumin",
+  "rodžiolė (rhodiola)": "rhodiola rosea", "rodžiolė": "rhodiola rosea",
+  "ašvaganda (ashwagandha ksm-66)": "ashwagandha", "ašvaganda": "ashwagandha", "ashwagandha": "ashwagandha",
+  "ginkmedis (ginkgo biloba)": "ginkgo biloba", "ginkmedis": "ginkgo biloba",
+  "bakopa (bacopa monnieri)": "bacopa monnieri", "bakopa": "bacopa monnieri", "maca": "maca",
+  "5-htp": "5-HTP", "gaba": "GABA supplementation", "glicinas": "glycine", "l-tirozinas": "l-tyrosine",
+  "l-karnitinas": "l-carnitine", "acetil-l-karnitinas (alcar)": "acetyl-l-carnitine",
+  "hmb": "beta-hydroxy-beta-methylbutyrate HMB", "bcaa": "branched-chain amino acids",
+  "eaa (nepakeičiamos aminorūgštys)": "essential amino acids", "betainas (tmg)": "betaine trimethylglycine",
+  "agmatino sulfatas": "agmatine sulfate", "alfa-gpc (kolinas)": "alpha-GPC choline", "inozitolis": "inositol",
+  "melatoninas": "melatonin", "melisa (lemon balm)": "lemon balm melissa officinalis", "valerijonas": "valerian",
+  "kolagenas": "collagen", "hialurono rūgštis": "hyaluronic acid", "beta-gliukanai": "beta-glucans",
+  "probiotikai": "probiotics", "prebiotikai (inulinas)": "prebiotics inulin", "psyllium (skaidulos)": "psyllium fiber",
+  "mct aliejus": "MCT oil medium chain triglycerides", "astaksantinas": "astaxanthin",
+  "liuteinas + zeaksantinas": "lutein zeaxanthin", "fisetinas": "fisetin",
+  "alfa lipoinė rūgštis (ala)": "alpha-lipoic acid", "saulėgrąžų lecitinas": "sunflower lecithin",
+  "kreatino monohidratas": "creatine monohydrate", "kreatinas hcl": "creatine HCL", "kreatinas": "creatine",
+  "taurinas": "taurine", "beta-alaninas": "beta-alanine", "kofeinas": "caffeine", "l-theanine": "l-theanine",
+  "l-citrulinas / malatas": "l-citrulline malate", "l-citrulinas": "l-citrulline", "citrulinas": "citrulline",
+  "elektrolitai (na/k/mg)": "electrolytes hydration", "elektrolitai": "electrolytes",
+};
