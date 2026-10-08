@@ -736,10 +736,10 @@ export default function PlannerPage() {
               <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
             </div>
             <div>
-              <h4 className="font-heading font-bold text-white mb-3">Partnerystė</h4>
+              <h4 className="font-heading font-bold text-white mb-3">Jūsų reklama</h4>
               <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
-              <a data-testid="partnership-contact-email-link" href="mailto:partneryste@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
-                <Mail className="h-4 w-4" /> partneryste@5op.lt
+              <a data-testid="partnership-contact-email-link" href="mailto:info@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
+                <Mail className="h-4 w-4" /> info@5op.lt
               </a>
             </div>
             <div className="flex flex-col items-start md:items-end justify-start">
