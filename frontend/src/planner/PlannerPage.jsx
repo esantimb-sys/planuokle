@@ -82,7 +82,7 @@ function readInitial() {
   return {
     profile: s?.profile ?? "vyras",
     sensitive: typeof s?.sensitive === "boolean" ? s.sensitive : false,
-    selected: Array.isArray(s?.selected) ? s.selected : ["d3k2", "omega3", "magnis-glicinatas"],
+    selected: Array.isArray(s?.selected) ? s.selected : [],
     custom: Array.isArray(s?.custom) ? s.custom : [],
   };
 }
