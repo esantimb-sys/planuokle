@@ -324,3 +324,8 @@ const CUSTOM_TIER = {
 export function tierForName(name) {
   return CUSTOM_TIER[name.trim().toLowerCase()] ?? 0;
 }
+
+export function pubmedUrl(name) {
+  const clean = name.replace(/\(.*?\)/g, "").replace(/\/.*/, "").trim() || name.trim();
+  return `https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(clean + " meta-analysis")}`;
+}

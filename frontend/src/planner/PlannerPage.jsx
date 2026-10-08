@@ -16,7 +16,7 @@ import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact, tierForName,
+  SUPPLEMENTS, TIME_BLOCKS, CATEGORIES, PARTNERS, SOURCES, BLOCK_OPTIONS, REFS, TIER_MAP, TIERS, searchCustomDb, findCustomExact, tierForName, pubmedUrl,
   doseFor, stomachText, getWarnings,
 } from "@/planner/data";
 
@@ -484,6 +484,15 @@ export default function PlannerPage() {
                           >
                             <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[ct]}`} /> {TIERS[ct].label}
                           </span>
+                          <a
+                            href={pubmedUrl(c.name)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-testid={`custom-ref-link-${c.id}`}
+                            className="mt-1 ml-2 inline-flex items-center gap-1 text-[10px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+                          >
+                            <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                          </a>
                         </span>
                         <button data-testid={`custom-remove-${c.id}`} onClick={() => setCustom((p) => p.filter((x) => x.id !== c.id))} className="text-rose-500 hover:text-rose-700 shrink-0">
                           <Trash2 className="h-4 w-4" />
@@ -603,13 +612,19 @@ export default function PlannerPage() {
                           <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
                           <div className="mt-2 flex items-center gap-2 flex-wrap">
                             {item.isCustom ? (
-                              <span
-                                data-testid={`schedule-tier-badge-${item.key}`}
-                                title={TIERS[item.tier].label}
-                                className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
-                              >
-                                <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
-                              </span>
+                              <>
+                                <span
+                                  data-testid={`schedule-tier-badge-${item.key}`}
+                                  title={TIERS[item.tier].label}
+                                  className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
+                                >
+                                  <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
+                                </span>
+                                <a href={pubmedUrl(item.name)} target="_blank" rel="noopener noreferrer" data-testid={`schedule-ref-link-${item.key}`}
+                                  className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2">
+                                  <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
+                                </a>
+                              </>
                             ) : (
                               <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`}
                                 className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
