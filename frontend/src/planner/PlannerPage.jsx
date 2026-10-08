@@ -261,7 +261,7 @@ export default function PlannerPage() {
           </span>
           <span className="leading-tight">
             <span className="block font-heading font-extrabold text-slate-900 text-base">5op.lt</span>
-            <span className="block text-[11px] text-slate-500 -mt-0.5">Vitaminų ir papildų vartojimo Planuoklė</span>
+            <span className="block text-[11px] text-slate-500 -mt-0.5">Vitaminų ir papildų vartojimo planuoklė</span>
           </span>
         </a>
         <a
