@@ -699,6 +699,7 @@ export default function PlannerPage() {
                           </div>
                           <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
                           <div className="mt-2 flex items-center gap-2 flex-wrap">
+                            <div className="mt-2 flex items-center gap-2 flex-wrap">
                             {item.isCustom && (
                               <span
                                 data-testid={`schedule-tier-badge-${item.key}`}
@@ -723,6 +724,10 @@ export default function PlannerPage() {
                               rel="noopener noreferrer"
                               data-testid={`partner-buy-external-link-${item.key}`}
                               className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900"
+                            >
+                              <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
+                            </a>
+                          </div>
                             >
                               <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
                             </a>
