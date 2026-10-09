@@ -727,6 +727,7 @@ export default function PlannerPage() {
                               <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
                             </a>
                           </div>
+                          </div>
                     </div>
                   </div>
                 );
