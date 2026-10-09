@@ -590,27 +590,28 @@ export default function PlannerPage() {
           </div>
 
           <div className="lg:col-span-7 space-y-6">
+            {/* Export bar su „Padėkota“ mygtuku pačiame kairiajame krašte prie pavadinimo */}
             <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
-              <div className="flex items-center gap-3">
-                <p className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                  <CircleCheck className="h-4 w-4 text-teal-600" /> Jūsų asmeninis grafikas
-                </p>
+              <p className="text-sm font-semibold text-slate-700 flex items-center gap-2.5">
+                <CircleCheck className="h-4 w-4 text-teal-600 shrink-0" /> 
+                <span>Jūsų asmeninis grafikas</span>
+                {/* „Padėkota“ mygtukas šalia pavadinimo */}
                 <button
                   onClick={handleThanksClick}
                   disabled={hasThanked}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all ${
+                  className={`ml-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold shadow-sm transition-all ${
                     hasThanked 
                       ? "bg-emerald-600 text-white border border-emerald-600 cursor-default" 
                       : "bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 active:scale-95"
                   }`}
                 >
-                  {hasThanked ? <Check className="h-3.5 w-3.5" /> : <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />}
+                  {hasThanked ? <Check className="h-3 w-3" /> : <Heart className="h-3 w-3 text-rose-500 fill-rose-500" />}
                   <span>{hasThanked ? "Padėkota" : "Ačiū"}</span>
                   <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
                     {thanksCount}
                   </span>
                 </button>
-              </div>
+              </p>
 
               <div className="flex gap-2">
                 <DropdownMenu>
@@ -768,25 +769,4 @@ export default function PlannerPage() {
                 <Mail className="h-4 w-4" /> info@5op.lt
               </a>
             </div>
-            <div className="flex flex-col items-start md:items-end justify-start">
-              <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
-              <a
-                data-testid="footer-eshop-bright-cta-btn"
-                href="https://5op.lt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
-              >
-                <ShoppingBag className="h-5 w-5" /> Apsilankyti el. parduotuvėje 5op.lt
-              </a>
-            </div>
-          </div>
-          <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
-            {DISCLAIMER}
-          </div>
-          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt  All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
+            <div className="flex flex-col items-start md
