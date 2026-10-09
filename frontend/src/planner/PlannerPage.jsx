@@ -452,4 +452,338 @@ export default function PlannerPage() {
                                 rel="noopener noreferrer"
                                 data-testid={`supplement-ref-link-${s.id}`}
                                 onClick={(e) => e.stopPropagation()}
-                                className="inline-flex items-center gap-1 text-
+                                className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+                              >
+                                <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                              </a>
+                            )}
+                          </span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              ))}
+
+              <div className="space-y-3 pt-2 border-t border-slate-100">
+                <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400">Pridėkite savo papildą</h3>
+                <div className="relative">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
+                    <Input
+                      data-testid="custom-supplement-text-input"
+                      className="pl-9"
+                      placeholder="Pradėkite rašyti (pvz., selenas, nmn...)"
+                      value={cName}
+                      autoComplete="off"
+                      onChange={(e) => handleCustomName(e.target.value)}
+                      onFocus={() => setShowSug(true)}
+                      onBlur={() => setTimeout(() => setShowSug(false), 150)}
+                    />
+                  </div>
+                  {showSug && suggestions.length > 0 && (
+                    <ul data-testid="custom-supplement-suggestions" className="absolute z-30 mt-1 w-full max-h-60 overflow-auto rounded-xl border border-slate-200 bg-white shadow-lg">
+                      {suggestions.map((item) => (
+                        <li key={item.name}>
+                          <button
+                            type="button"
+                            data-testid={`custom-suggestion-${item.name}`}
+                            onMouseDown={(e) => { e.preventDefault(); pickSuggestion(item); }}
+                            className="w-full text-left px-3 py-2.5 hover:bg-teal-50 border-b border-slate-100 last:border-0"
+                          >
+                            <span className="flex items-center justify-between gap-2">
+                              <span className="text-sm font-medium text-slate-800">{item.name}</span>
+                              <span className="text-[11px] text-teal-700 font-semibold shrink-0">{item.dose}</span>
+                            </span>
+                            {(item.synergy || item.caution) && (
+                              <span className="mt-1 flex flex-wrap gap-1.5">
+                                {item.synergy && (
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-teal-700 bg-teal-50 border border-teal-200 px-1.5 py-0.5 rounded-full">
+                                    <Sparkles className="h-2.5 w-2.5" /> {item.synergy}
+                                  </span>
+                                )}
+                                {item.caution && (
+                                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-full">
+                                    <AlertTriangle className="h-2.5 w-2.5" /> {item.caution}
+                                  </span>
+                                )}
+                              </span>
+                            )}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <Input placeholder="Dozė (pvz., 500 mg)" value={cDose} onChange={(e) => setCDose(e.target.value)} data-testid="custom-supplement-dose-input" />
+                  <Select value={cBlock} onValueChange={setCBlock}>
+                    <SelectTrigger data-testid="custom-supplement-time-select"><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {BLOCK_OPTIONS.map((b) => <SelectItem key={b.value} value={b.value}>{b.label}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <Button data-testid="custom-supplement-add-button" onClick={addCustom} className="w-full bg-teal-600 hover:bg-teal-700">
+                  <Plus className="h-4 w-4" /> Pridėti savo papildą
+                </Button>
+                {custom.length > 0 && (
+                  <ul className="space-y-1.5">
+                    {custom.map((c) => {
+                      const ct = c.tier ?? tierForName(c.name);
+                      return (
+                      <li key={c.id} className="flex items-center justify-between gap-2 text-sm bg-slate-50 rounded-lg px-3 py-2 border border-slate-200">
+                        <span className="min-w-0 flex-1">
+                          <span className="flex items-center gap-2">
+                            <b className="truncate">{c.name}</b> {c.dose && <span className="text-slate-500 shrink-0">· {c.dose}</span>}
+                          </span>
+                          <span
+                            data-testid={`custom-tier-badge-${c.id}`}
+                            title={TIERS[ct].label}
+                            className={`mt-1 inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[ct]}`}
+                          >
+                            <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[ct]}`} /> {TIERS[ct].label}
+                          </span>
+                          <a
+                            href={pubmedUrl(c.name)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-testid={`custom-ref-link-${c.id}`}
+                            className="mt-1 ml-2 inline-flex items-center gap-1 text-[10px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+                          >
+                            <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                          </a>
+                        </span>
+                        <button data-testid={`custom-remove-${c.id}`} onClick={() => setCustom((p) => p.filter((x) => x.id !== c.id))} className="text-rose-500 hover:text-rose-700 shrink-0">
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            </section>
+
+            <section className="space-y-3">
+              <h3 className="text-xs uppercase tracking-wider font-bold text-slate-400 px-1">Partnerių pasirinkimas</h3>
+              {PARTNERS.map((p) => (
+                <div
+                  key={p.id}
+                  data-testid="partner-sidebar-ad-placeholder"
+                  className="bg-gradient-to-b from-teal-50/60 to-emerald-50/60 border border-teal-200/60 p-4 rounded-2xl flex items-center gap-4 hover:shadow-md hover:-translate-y-0.5 transition-all"
+                >
+                  <div className="h-14 w-14 rounded-xl bg-white border border-teal-100 flex items-center justify-center shrink-0">
+                    <Beaker className="h-6 w-6 text-teal-600" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-slate-900 truncate">{p.name}</p>
+                    <p className="text-xs text-slate-500">{p.tag}</p>
+                  </div>
+                  <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-teal-700 hover:text-teal-900 inline-flex items-center gap-1 shrink-0">
+                    Įsigyti <ExternalLink className="h-3 w-3" />
+                  </a>
+                </div>
+              ))}
+              <p className="text-[11px] text-slate-400 px-1">Reklaminė vieta — susisiekite: info@5op.lt</p>
+            </section>
+          </div>
+
+          <div className="lg:col-span-7 space-y-6">
+            <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
+              <div className="flex items-center gap-2.5">
+                <CircleCheck className="h-4 w-4 text-teal-600 shrink-0" />
+                <span className="text-sm font-semibold text-slate-700">Jūsų asmeninis grafikas</span>
+                <button
+                  onClick={handleThanksClick}
+                  disabled={hasThanked}
+                  className={`ml-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold shadow-sm transition-all ${
+                    hasThanked 
+                      ? "bg-emerald-600 text-white border border-emerald-600 cursor-default" 
+                      : "bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 active:scale-95"
+                  }`}
+                >
+                  {hasThanked ? <Check className="h-3 w-3" /> : <Heart className="h-3 w-3 text-rose-500 fill-rose-500" />}
+                  <span>{hasThanked ? "Padėkota" : "Ačiū"}</span>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
+                    {thanksCount}
+                  </span>
+                </button>
+              </div>
+
+              <div className="flex gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button data-testid="export-schedule-download-btn" variant="outline" className="border-slate-300">
+                      <Download className="h-4 w-4" /> Atsisiųsti <ChevronDown className="h-3 w-3" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem data-testid="export-pdf-item" onClick={() => exportAs("pdf")}>PDF dokumentas</DropdownMenuItem>
+                    <DropdownMenuItem data-testid="export-png-item" onClick={() => exportAs("png")}>PNG paveikslėlis</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <Button data-testid="export-schedule-copy-link-btn" onClick={copyLink} className="bg-teal-600 hover:bg-teal-700">
+                  <Link2 className="h-4 w-4" /> Kopijuoti nuorodą
+                </Button>
+              </div>
+            </div>
+
+            {warnings.length > 0 && (
+              <section data-testid="scientific-interaction-warnings-block" className="bg-rose-50/70 border border-rose-200/80 p-5 rounded-2xl space-y-3">
+                <h3 className="font-heading text-base font-bold text-rose-800 flex items-center gap-2">
+                  <AlertTriangle className="h-5 w-5" /> Moksliniai įspėjimai ir sąveikos
+                </h3>
+                {warnings.map((w, i) => (
+                  <div key={i} data-testid="interaction-warning-alert-item" className="flex gap-3 items-start text-sm">
+                    <span className={`mt-1 h-2 w-2 rounded-full shrink-0 ${w.level === "high" ? "bg-rose-600" : w.level === "med" ? "bg-amber-500" : "bg-teal-500"}`} />
+                    <p className="text-rose-900"><b>{w.title}:</b> {w.text}</p>
+                  </div>
+                ))}
+              </section>
+            )}
+
+            <div ref={captureRef} className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 space-y-5">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <p className="font-heading text-xl font-extrabold text-slate-900">Dienos grafikas</p>
+                  <p className="text-sm text-slate-500">Profilis: <b className="text-teal-700">{profileLabel}</b>{sensitive && " · Jautrus virškinimas"}</p>
+                </div>
+                <span className="text-xs font-bold text-slate-400">5op.lt</span>
+              </div>
+
+              {activeBlocks.length === 0 && (
+                <p className="text-sm text-slate-500 py-8 text-center">Pasirinkite papildus kairėje, kad matytumėte savo grafiką.</p>
+              )}
+
+              {activeBlocks.map((b) => {
+                const Icon = ICONS[b.icon];
+                return (
+                  <div key={b.id} data-testid={`schedule-timeblock-${b.id}`} className="rounded-2xl border border-slate-200 overflow-hidden">
+                    <div className="flex items-center gap-3 bg-gradient-to-r from-teal-50 to-emerald-50/40 px-4 py-3 border-b border-slate-100">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-teal-600 border border-teal-100">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div>
+                        <p className="font-heading font-bold text-slate-900 leading-tight">{b.label}</p>
+                        <p className="text-xs text-slate-500">{b.time} · {b.desc}</p>
+                      </div>
+                    </div>
+                    <div className="divide-y divide-slate-100">
+                      {schedule[b.id].map((item) => (
+                        <div key={item.key} className="px-4 py-3.5 group/item">
+                          <div className="flex items-start justify-between gap-3">
+                            <p className="font-semibold text-slate-800 text-sm">{item.name}</p>
+                            <div className="flex items-center gap-2 shrink-0">
+                              <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2 py-0.5 rounded-full">{item.dose}</span>
+                              <button
+                                data-testid={`schedule-remove-${item.key}`}
+                                onClick={() => removeFromSchedule(item)}
+                                title="Pašalinti iš grafiko"
+                                aria-label="Pašalinti iš grafiko"
+                                className="flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+                            </div>
+                          </div>
+                          <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
+                            <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-medium">
+                              <Clock className="h-3 w-3" /> {item.stomach}
+                            </span>
+                          </div>
+                          <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
+                          <div className="mt-2 flex items-center gap-2 flex-wrap">
+                            {item.isCustom ? (
+                              <>
+                                <span
+                                  data-testid={`schedule-tier-badge-${item.key}`}
+                                  title={TIERS[item.tier].label}
+                                  className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
+                                >
+                                  <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
+                                </span>
+                                <a href={pubmedUrl(item.name)} target="_blank" rel="noopener noreferrer" data-testid={`schedule-ref-link-${item.key}`} className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2">
+                                  <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
+                                </a>
+                              </>
+                            ) : (
+                              <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
+                                <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+              <p className="text-[10px] text-slate-400 pt-2 border-t border-slate-100">Tik informaciniais tikslais. Pasitarkite su gydytoju. 5op.lt</p>
+            </div>
+          </div>
+        </div>
+
+        <section id="saltiniai" data-testid="scientific-sources-doi-block" className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-sm">
+          <h2 className="font-heading text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+            <FlaskConical className="h-6 w-6 text-teal-600" /> Moksliniai šaltiniai ir meta-analizės
+          </h2>
+          <p className="text-sm text-slate-500 mt-1.5">Realios sisteminės apžvalgos ir meta-analizės (PubMed / DOI).</p>
+          <div className="mt-6 grid sm:grid-cols-2 gap-4">
+            {SOURCES.map((s, i) => (
+              <a
+                key={i}
+                data-testid="pubmed-doi-reference-link"
+                href={s.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block rounded-xl border border-slate-200 p-4 hover:border-teal-300 hover:shadow-md hover:-translate-y-0.5 transition-all"
+              >
+                <p className="text-sm font-semibold text-slate-800 leading-snug">{s.title}</p>
+                <p className="text-xs text-slate-500 mt-1.5">{s.authors}</p>
+                <p className="text-xs font-mono text-teal-700 mt-1 inline-flex items-center gap-1">DOI: {s.doi} <ExternalLink className="h-3 w-3" /></p>
+              </a>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      <footer data-testid="main-footer" className="bg-[#1F1F1F] text-[#CDCDCD] mt-10 rounded-t-3xl">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="flex items-center gap-2.5 mb-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
+                <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
+              </div>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
+            </div>
+            <div>
+              <h4 className="font-heading font-bold text-white mb-3">Jūsų reklama</h4>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
+              <a data-testid="partnership-contact-email-link" href="mailto:info@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
+                <Mail className="h-4 w-4" /> info@5op.lt
+              </a>
+            </div>
+            <div>
+              <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
+              <a
+                data-testid="footer-eshop-bright-cta-btn"
+                href="https://5op.lt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
+              >
+                <ShoppingBag className="h-5 w-5" /> Apsilankyti el. parduotuvėje 5op.lt
+              </a>
+            </div>
+          </div>
+          <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
+            {DISCLAIMER}
+          </div>
+          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
