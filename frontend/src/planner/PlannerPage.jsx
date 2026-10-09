@@ -720,7 +720,7 @@ export default function PlannerPage() {
                   </div>
                 );
               })}
-              <p className="text-[10px] text-slate-400 pt-2 border-t border-slate-100">Tik informaciniais tikslais. Pasitarkite su gydytoju. 5op.lt</p>
+              <p className="text-[10px] text-slate-400 pt-2 border-t border-slate-100">Tik informaciniais tikslais. Pasitarkite su gydytoju. </p>
             </div>
           </div>
         </div>
