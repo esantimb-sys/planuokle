@@ -678,31 +678,57 @@ export default function PlannerPage() {
                       {schedule[b.id].map((item) => (
                         <div key={item.key} className="px-4 py-3.5 group/item">
                           <div className="flex items-start justify-between gap-3">
-                            <p className="font-semibold text-slate-800 text-sm">{item.name}</p>
-                            <div className="flex items-center gap-2 shrink-0">
-                              <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2 py-0.5 rounded-full">{item.dose}</span>
-                              <button
-                                data-testid={`schedule-remove-${item.key}`}
-                                onClick={() => removeFromSchedule(item)}
-                                title="Pašalinti iš grafiko"
-                                aria-label="Pašalinti iš grafiko"
-                                className="flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
-                              >
-                                <X className="h-4 w-4" />
-                              </button>
-                            </div>
-                          </div>
-                          <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
-                            <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-medium">
-                              <Clock className="h-3 w-3" /> {item.stomach}
-                            </span>
-                          </div>
-                          <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
-                          <div className="mt-2 flex items-center gap-2 flex-wrap">
-                            {item.isCustom && (
-                              <span
-                                data-testid={`schedule-tier-badge-${item.key}`}
-                                title={TIERS[item.tier].label}
+  <p className="font-semibold text-slate-800 text-sm">{item.name}</p>
+  <div className="flex items-center gap-2 shrink-0">
+    <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2 py-0.5 rounded-full">{item.dose}</span>
+    <button
+      data-testid={`schedule-remove-${item.key}`}
+      onClick={() => removeFromSchedule(item)}
+      title="Pašalinti iš grafiko"
+      aria-label="Pašalinti iš grafiko"
+      className="flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+    >
+      <X className="h-4 w-4" />
+    </button>
+  </div>
+</div>
+<div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
+  <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-medium">
+    <Clock className="h-3 w-3" /> {item.stomach}
+  </span>
+</div>
+{item.note && (
+  <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
+)}
+<div className="mt-2 flex items-center gap-2 flex-wrap">
+  {item.isCustom && (
+    <span
+      data-testid={`schedule-tier-badge-${item.key}`}
+      title={TIERS[item.tier].label}
+      className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
+    >
+      <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
+    </span>
+  )}
+  <a
+    href={item.isCustom ? pubmedUrl(item.name) : "/?page=reklama"}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-testid={item.isCustom ? `schedule-ref-link-${item.key}` : `partner-ref-link-${item.key}`}
+    className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
+  >
+    <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
+  </a>
+  <a
+    href="/?page=reklama"
+    target="_blank"
+    rel="noopener noreferrer"
+    data-testid={`partner-buy-external-link-${item.key}`}
+    className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900"
+  >
+    <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
+  </a>
+</div>
                                 className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
                               >
                                 <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
