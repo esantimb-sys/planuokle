@@ -703,7 +703,7 @@ export default function PlannerPage() {
   <>
     <span
       data-testid={`schedule-tier-badge-${item.key}`}
-      title={TIERS[item.tier].label}
+      
       className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
     >
       <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
