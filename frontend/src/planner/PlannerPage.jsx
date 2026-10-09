@@ -99,7 +99,7 @@ export default function PlannerPage() {
   const [showSug, setShowSug] = useState(false);
   const captureRef = useRef(null);
 
-  // Ačiū mygtuko būsena
+  // Ačiū mygtuko būsena planuoklės viduje
   const [thanksCount, setThanksCount] = useState(() => {
     const saved = localStorage.getItem('planner_thanks_count');
     return saved ? parseInt(saved, 10) : 0;
@@ -261,11 +261,11 @@ export default function PlannerPage() {
     }
   };
 
-  const profileLabel = PROFILES.PROFILES ? null : PROFILES.find((p) => p.id === profile)?.label;
+  const profileLabel = PROFILES.find((p) => p.id === profile)?.label;
 
   return (
     <div className="min-h-screen bg-[#FAFBF9] text-slate-800 font-sans">
-      {/* Header */}
+      {/* Header - Švarus, jokių „Ačiū“ mygtukų viršuje */}
       <header
         data-testid="header-nav"
         className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3 flex items-center justify-between"
@@ -279,29 +279,15 @@ export default function PlannerPage() {
             <span className="block text-[11px] font-semibold text-slate-700 -mt-0.5">Vitaminų ir papildų vartojimo planuoklė</span>
           </span>
         </a>
-        <div className="flex items-center gap-3">
-          {/* Ačiū mygtukas headeryje */}
-          <button
-            onClick={handleThanksClick}
-            className="flex items-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-300 px-3.5 py-1.5 rounded-full text-sm font-semibold text-slate-700 transition-all active:scale-95"
-          >
-            <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />
-            <span>Ačiū</span>
-            <span className="bg-rose-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">
-              {thanksCount}
-            </span>
-          </button>
-
-          <a
-            data-testid="header-eshop-cta-button"
-            href="https://5op.lt"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-slate-900 text-white text-sm font-semibold px-4 py-2 hover:bg-slate-700 active:scale-95 transition-all"
-          >
-            <ShoppingBag className="h-4 w-4" /> El. parduotuvė
-          </a>
-        </div>
+        <a
+          data-testid="header-eshop-cta-button"
+          href="https://5op.lt"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden sm:inline-flex items-center gap-2 rounded-full bg-slate-900 text-white text-sm font-semibold px-4 py-2 hover:bg-slate-700 active:scale-95 transition-all"
+        >
+          <ShoppingBag className="h-4 w-4" /> El. parduotuvė
+        </a>
       </header>
 
       {/* Hero */}
@@ -606,11 +592,25 @@ export default function PlannerPage() {
 
           {/* RIGHT: schedule */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Export bar */}
+            {/* Export bar su „Ačiū“ mygtuku viduje (virš dienos grafiko sekcijos) */}
             <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
-              <p className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-                <CircleCheck className="h-4 w-4 text-teal-600" /> Jūsų asmeninis grafikas
-              </p>
+              <div className="flex items-center gap-3">
+                <p className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+                  <CircleCheck className="h-4 w-4 text-teal-600" /> Jūsų asmeninis grafikas
+                </p>
+                {/* Ačiū mygtukas planuoklės viduje */}
+                <button
+                  onClick={handleThanksClick}
+                  className="flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-300 px-3 py-1 rounded-full text-xs font-semibold text-slate-700 shadow-sm transition-all active:scale-95"
+                >
+                  <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />
+                  <span>Ačiū</span>
+                  <span className="bg-rose-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">
+                    {thanksCount}
+                  </span>
+                </button>
+              </div>
+
               <div className="flex gap-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
