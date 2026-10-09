@@ -602,13 +602,13 @@ export default function PlannerPage() {
 
           {/* RIGHT: schedule */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Export bar su vienkartiniu Ačiū mygtuku */}
+            {/* Export bar su „Padėkota“ mygtuku */}
             <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
               <div className="flex items-center gap-3">
                 <p className="text-sm font-semibold text-slate-700 flex items-center gap-2">
                   <CircleCheck className="h-4 w-4 text-teal-600" /> Jūsų asmeninis grafikas
                 </p>
-                {/* Vienkartinis Ačiū mygtukas */}
+                {/* Vienkartinis Padėkota mygtukas */}
                 <button
                   onClick={handleThanksClick}
                   disabled={hasThanked}
@@ -619,7 +619,7 @@ export default function PlannerPage() {
                   }`}
                 >
                   {hasThanked ? <Check className="h-3.5 w-3.5" /> : <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />}
-                  <span>{hasThanked ? "Ačiū!" : "Ačiū"}</span>
+                  <span>{hasThanked ? "Padėkota" : "Ačiū"}</span>
                   <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
                     {thanksCount}
                   </span>
@@ -721,90 +721,4 @@ export default function PlannerPage() {
                                   <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
                                 </span>
                                 <a href={pubmedUrl(item.name)} target="_blank" rel="noopener noreferrer" data-testid={`schedule-ref-link-${item.key}`}
-                                  className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2">
-                                  <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
-                                </a>
-                              </>
-                            ) : (
-                              <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`}
-                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
-                                <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
-                              </a>
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-              <p className="text-[10px] text-slate-400 pt-2 border-t border-slate-100">Tik informaciniais tikslais. Pasitarkite su gydytoju. 5op.lt</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Scientific sources */}
-        <section id="saltiniai" data-testid="scientific-sources-doi-block" className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-sm">
-          <h2 className="font-heading text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <FlaskConical className="h-6 w-6 text-teal-600" /> Moksliniai šaltiniai ir meta-analizės
-          </h2>
-          <p className="text-sm text-slate-500 mt-1.5">Realios sisteminės apžvalgos ir meta-analizės (PubMed / DOI).</p>
-          <div className="mt-6 grid sm:grid-cols-2 gap-4">
-            {SOURCES.map((s, i) => (
-              <a
-                key={i}
-                data-testid="pubmed-doi-reference-link"
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-xl border border-slate-200 p-4 hover:border-teal-300 hover:shadow-md hover:-translate-y-0.5 transition-all"
-              >
-                <p className="text-sm font-semibold text-slate-800 leading-snug">{s.title}</p>
-                <p className="text-xs text-slate-500 mt-1.5">{s.authors}</p>
-                <p className="text-xs font-mono text-teal-700 mt-1 inline-flex items-center gap-1">DOI: {s.doi} <ExternalLink className="h-3 w-3" /></p>
-              </a>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {/* Footer */}
-      <footer data-testid="main-footer" className="bg-[#1F1F1F] text-[#CDCDCD] mt-10 rounded-t-3xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center gap-2.5 mb-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
-                <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
-              </div>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold text-white mb-3">Jūsų reklama</h4>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
-              <a data-testid="partnership-contact-email-link" href="mailto:info@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
-                <Mail className="h-4 w-4" /> info@5op.lt
-              </a>
-            </div>
-            <div className="flex flex-col items-start md:items-end justify-start">
-              <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
-              <a
-                data-testid="footer-eshop-bright-cta-btn"
-                href="https://5op.lt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
-              >
-                <ShoppingBag className="h-5 w-5" /> Apsilankyti el. parduotuvėje 5op.lt
-              </a>
-            </div>
-          </div>
-          <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
-            {DISCLAIMER}
-          </div>
-          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt  All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
+                                  className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-
