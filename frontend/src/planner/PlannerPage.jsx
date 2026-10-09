@@ -590,14 +590,15 @@ export default function PlannerPage() {
           </div>
 
           <div className="lg:col-span-7 space-y-6">
+            {/* Viskas vienoje gražioje eilutėje */}
             <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-2.5 flex-wrap">
                 <CircleCheck className="h-4 w-4 text-teal-600 shrink-0" />
                 <span className="text-sm font-semibold text-slate-700">Jūsų asmeninis grafikas</span>
                 <button
                   onClick={handleThanksClick}
                   disabled={hasThanked}
-                  className={`ml-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold shadow-sm transition-all ${
+                  className={`ml-1 inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold shadow-sm transition-all ${
                     hasThanked 
                       ? "bg-emerald-600 text-white border border-emerald-600 cursor-default" 
                       : "bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 active:scale-95"
@@ -611,7 +612,7 @@ export default function PlannerPage() {
                 </button>
               </div>
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 items-center flex-wrap">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button data-testid="export-schedule-download-btn" variant="outline" className="border-slate-300">
