@@ -770,7 +770,7 @@ export default function PlannerPage() {
               <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
               <a
                 data-testid="footer-eshop-bright-cta-btn"
-                href="https://5op.lt"
+                href="https://5op.lt/parduotuve/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
