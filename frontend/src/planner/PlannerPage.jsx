@@ -580,7 +580,7 @@ export default function PlannerPage() {
                     <p className="text-sm font-bold text-slate-900 truncate">{p.name}</p>
                     <p className="text-xs text-slate-500">{p.tag}</p>
                   </div>
-                  <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-teal-700 hover:text-teal-900 inline-flex items-center gap-1 shrink-0">
+                  <a href="/?page=reklama" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-teal-700 hover:text-teal-900 inline-flex items-center gap-1 shrink-0">
                     Įsigyti <ExternalLink className="h-3 w-3" />
                   </a>
                 </div>
