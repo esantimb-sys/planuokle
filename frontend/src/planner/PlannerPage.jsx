@@ -606,9 +606,11 @@ export default function PlannerPage() {
                 >
                   {hasThanked ? <Check className="h-3 w-3" /> : <Heart className="h-3 w-3 text-rose-500 fill-rose-500" />}
                   <span>{hasThanked ? "Padėkota" : "Ačiū"}</span>
-                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
-                    {thanksCount}
-                  </span>
+                  {hasThanked && (
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
+                {thanksCount}
+              </span>
+            )}
                 </button>
               </div>
 
