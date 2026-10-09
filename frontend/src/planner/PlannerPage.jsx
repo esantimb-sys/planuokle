@@ -769,4 +769,19 @@ export default function PlannerPage() {
                 <Mail className="h-4 w-4" /> info@5op.lt
               </a>
             </div>
-            <div className="flex flex-col items-start md
+            <div className="flex flex-col items-start md:items-end justify-start">
+              <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
+              <a
+                data-testid="footer-eshop-bright-cta-btn"
+                href="https://5op.lt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
+              >
+                <ShoppingBag className="h-5 w-5" /> Apsilankyti el. parduotuvėje 5op.lt
+              </a>
+            </div>
+          </div>
+          <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
+            {DISCLAIMER}
+          </div>
