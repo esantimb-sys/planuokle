@@ -103,7 +103,7 @@ export const CATEGORIES = {
 };
 
 export const PARTNERS = [
-  { id: "omega", name: "5op.lt Premium Omega-3", tag: "EPA/DHA 1000 mg", blurb: "Aukšto grynumo žuvų taukai triglicerido formoje." },
+  { id: "omega", name: "Premium Omega-3", tag: "EPA/DHA 1000 mg", blurb: "Aukšto grynumo žuvų taukai triglicerido formoje." },
   { id: "magnis", name: "Magnio Bisglicinatas", tag: "Geras įsisavinimas", blurb: "Švelni skrandžiui forma kokybiškam miegui." },
   { id: "d3", name: "Vitaminas D3 + K2", tag: "2000 UI / 100 µg", blurb: "Kaulams, imunitetui ir raumenų funkcijai." },
 ];
