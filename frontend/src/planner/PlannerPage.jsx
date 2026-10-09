@@ -699,20 +699,7 @@ export default function PlannerPage() {
                           </div>
                           <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
                           <div className="mt-2 flex items-center gap-2 flex-wrap">
-                            {item.isCustom ? (
-  <>
-    <span
-      data-testid={`schedule-tier-badge-${item.key}`}
-      
-      className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
-    >
-      <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
-    </span>
-    <a href={pubmedUrl(item.name)} target="_blank" rel="noopener noreferrer" data-testid={`schedule-ref-link-${item.key}`} className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2">
-      <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
-    </a>
-  </>
-) : null}
+                            
 <a href="/?page=reklama" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
   <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
 </a>
