@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import {
   Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble, FlaskConical, ShieldAlert,
   Download, Link2, Plus, Trash2, ExternalLink, Mars, Venus, Baby, Leaf, Clock,
-  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles, X, Heart,
+  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles, X, Heart, Check,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -99,18 +99,28 @@ export default function PlannerPage() {
   const [showSug, setShowSug] = useState(false);
   const captureRef = useRef(null);
 
-  // Ačiū mygtuko būsena planuoklės viduje
+  // Ačiū mygtuko būsena ir localStorage sinchronizacija
   const [thanksCount, setThanksCount] = useState(() => {
     const saved = localStorage.getItem('planner_thanks_count');
     return saved ? parseInt(saved, 10) : 0;
+  });
+
+  const [hasThanked, setHasThanked] = useState(() => {
+    return localStorage.getItem('planner_has_thanked') === 'true';
   });
 
   useEffect(() => {
     localStorage.setItem('planner_thanks_count', thanksCount);
   }, [thanksCount]);
 
+  useEffect(() => {
+    localStorage.setItem('planner_has_thanked', hasThanked);
+  }, [hasThanked]);
+
   const handleThanksClick = () => {
+    if (hasThanked) return;
     setThanksCount(prev => prev + 1);
+    setHasThanked(true);
     toast.success("Ačiū už palaikymą! ❤️");
   };
 
@@ -265,7 +275,7 @@ export default function PlannerPage() {
 
   return (
     <div className="min-h-screen bg-[#FAFBF9] text-slate-800 font-sans">
-      {/* Header - Švarus, jokių „Ačiū“ mygtukų viršuje */}
+      {/* Header */}
       <header
         data-testid="header-nav"
         className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3 flex items-center justify-between"
@@ -592,20 +602,25 @@ export default function PlannerPage() {
 
           {/* RIGHT: schedule */}
           <div className="lg:col-span-7 space-y-6">
-            {/* Export bar su „Ačiū“ mygtuku viduje (virš dienos grafiko sekcijos) */}
+            {/* Export bar su vienkartiniu Ačiū mygtuku */}
             <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
               <div className="flex items-center gap-3">
                 <p className="text-sm font-semibold text-slate-700 flex items-center gap-2">
                   <CircleCheck className="h-4 w-4 text-teal-600" /> Jūsų asmeninis grafikas
                 </p>
-                {/* Ačiū mygtukas planuoklės viduje */}
+                {/* Vienkartinis Ačiū mygtukas */}
                 <button
                   onClick={handleThanksClick}
-                  className="flex items-center gap-1.5 bg-white hover:bg-slate-50 border border-slate-300 px-3 py-1 rounded-full text-xs font-semibold text-slate-700 shadow-sm transition-all active:scale-95"
+                  disabled={hasThanked}
+                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all ${
+                    hasThanked 
+                      ? "bg-emerald-600 text-white border border-emerald-600 cursor-default" 
+                      : "bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 active:scale-95"
+                  }`}
                 >
-                  <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />
-                  <span>Ačiū</span>
-                  <span className="bg-rose-500 text-white text-[10px] px-1.5 py-0.2 rounded-full font-bold">
+                  {hasThanked ? <Check className="h-3.5 w-3.5" /> : <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500" />}
+                  <span>{hasThanked ? "Ačiū!" : "Ačiū"}</span>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
                     {thanksCount}
                   </span>
                 </button>
