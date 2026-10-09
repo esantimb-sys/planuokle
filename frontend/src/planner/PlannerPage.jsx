@@ -652,7 +652,7 @@ export default function PlannerPage() {
                   <p className="font-heading text-xl font-extrabold text-slate-900">Dienos grafikas</p>
                   <p className="text-sm text-slate-500">Profilis: <b className="text-teal-700">{profileLabel}</b>{sensitive && " · Jautrus virškinimas"}</p>
                 </div>
-                <span className="text-xs font-bold text-slate-400">5op.lt</span>
+                <span className="text-xs font-bold text-slate-400"></span>
               </div>
 
               {activeBlocks.length === 0 && (
