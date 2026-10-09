@@ -713,7 +713,7 @@ export default function PlannerPage() {
                                 </a>
                               </>
                             ) : (
-                              <a href="https://5op.lt" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
+                              <a href="/?page=reklama" target="_blank" rel="noopener noreferrer" data-testid={`partner-buy-external-link-${item.key}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900">
                                 <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
                               </a>
                             )}
