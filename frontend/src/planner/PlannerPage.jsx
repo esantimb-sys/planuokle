@@ -120,7 +120,7 @@ export default function PlannerPage() {
     if (hasThanked) return;
     setThanksCount(prev => prev + 1);
     setHasThanked(true);
-    toast.success("Ačiū už palaikymą! <ThumbsUp size={248} color="#59f23a" strokeWidth={3} />");
+    toast.success("Ačiū už palaikymą!👍");
   };
 
   const buildShareUrl = () => {
