@@ -287,7 +287,7 @@ export default function PlannerPage() {
         </a>
         <a
           data-testid="header-eshop-cta-button"
-          href="https://5op.lt"
+          href="https://5op.lt/parduotuve/"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden sm:inline-flex items-center gap-2 rounded-full bg-slate-900 text-white text-sm font-semibold px-4 py-2 hover:bg-slate-700 active:scale-95 transition-all"
