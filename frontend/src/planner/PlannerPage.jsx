@@ -586,13 +586,12 @@ export default function PlannerPage() {
                 </div>
               ))}
               <p className="text-[11px] text-slate-400 px-1">
-  Reklaminė vieta — susisiekite: <a href="mailto:info@5op.lt" className="underline hover:text-slate-200 transition-colors">info@5op.lt</a>
-</p>
+                Reklaminė vieta — susisiekite: <a href="mailto:info@5op.lt" className="underline hover:text-slate-200 transition-colors">info@5op.lt</a>
+              </p>
             </section>
           </div>
 
           <div className="lg:col-span-7 space-y-6">
-            {/* Viskas vienoje gražioje eilutėje */}
             <div className="flex flex-wrap gap-3 items-center justify-between bg-slate-100/80 p-4 rounded-xl border border-slate-200">
               <div className="flex items-center gap-2.5 flex-wrap">
                 <CircleCheck className="h-4 w-4 text-teal-600 shrink-0" />
@@ -609,220 +608,29 @@ export default function PlannerPage() {
                   {hasThanked ? <Check className="h-3 w-3" /> : <Heart className="h-3 w-3 text-rose-500 fill-rose-500" />}
                   <span>{hasThanked ? "Padėkota" : "Ačiū"}</span>
                   {hasThanked && (
-              <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${hasThanked ? "bg-emerald-700 text-white" : "bg-rose-500 text-white"}`}>
-                {thanksCount}
-              </span>
-            )}
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full font-bold bg-emerald-700 text-white">
+                      {thanksCount}
+                    </span>
+                  )}
                 </button>
               </div>
 
-              <div className="flex gap-2 items-center flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap">
+                <Button
+                  data-testid="share-schedule-button"
+                  variant="outline"
+                  size="sm"
+                  onClick={copyLink}
+                  className="rounded-full text-xs font-semibold"
+                >
+                  <Link2 className="h-3.5 w-3.5 mr-1.5" /> Dalintis
+                </Button>
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button data-testid="export-schedule-download-btn" variant="outline" className="border-slate-300">
-                      <Download className="h-4 w-4" /> Atsisiųsti <ChevronDown className="h-3 w-3" />
+                    <Button data-testid="export-dropdown-trigger" size="sm" className="rounded-full bg-teal-600 hover:bg-teal-700 text-xs font-semibold">
+                      <Download className="h-3.5 w-3.5 mr-1.5" /> Atsisiųsti <ChevronDown className="h-3 w-3 ml-1 opacity-70" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem data-testid="export-pdf-item" onClick={() => exportAs("pdf")}>PDF dokumentas</DropdownMenuItem>
-                    <DropdownMenuItem data-testid="export-png-item" onClick={() => exportAs("png")}>PNG paveikslėlis</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                <Button data-testid="export-schedule-copy-link-btn" onClick={copyLink} className="bg-teal-600 hover:bg-teal-700">
-                  <Link2 className="h-4 w-4" /> Kopijuoti nuorodą
-                </Button>
-              </div>
-            </div>
-
-            {warnings.length > 0 && (
-              <section data-testid="scientific-interaction-warnings-block" className="bg-rose-50/70 border border-rose-200/80 p-5 rounded-2xl space-y-3">
-                <h3 className="font-heading text-base font-bold text-rose-800 flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5" /> Moksliniai įspėjimai ir sąveikos
-                </h3>
-                {warnings.map((w, i) => (
-                  <div key={i} data-testid="interaction-warning-alert-item" className="flex gap-3 items-start text-sm">
-                    <span className={`mt-1 h-2 w-2 rounded-full shrink-0 ${w.level === "high" ? "bg-rose-600" : w.level === "med" ? "bg-amber-500" : "bg-teal-500"}`} />
-                    <p className="text-rose-900"><b>{w.title}:</b> {w.text}</p>
-                  </div>
-                ))}
-              </section>
-            )}
-
-            <div ref={captureRef} className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 space-y-5">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                <div>
-                  <p className="font-heading text-xl font-extrabold text-slate-900">Dienos grafikas</p>
-                  <p className="text-sm text-slate-500">Profilis: <b className="text-teal-700">{profileLabel}</b>{sensitive && " · Jautrus virškinimas"}</p>
-                </div>
-                <span className="text-xs font-bold text-slate-400"></span>
-              </div>
-
-              {activeBlocks.length === 0 && (
-                <p className="text-sm text-slate-500 py-8 text-center">Pasirinkite papildus kairėje, kad matytumėte savo grafiką.</p>
-              )}
-
-              {activeBlocks.map((b) => {
-                const Icon = ICONS[b.icon];
-                return (
-                  <div key={b.id} data-testid={`schedule-timeblock-${b.id}`} className="rounded-2xl border border-slate-200 overflow-hidden">
-                    <div className="flex items-center gap-3 bg-gradient-to-r from-teal-50 to-emerald-50/40 px-4 py-3 border-b border-slate-100">
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white text-teal-600 border border-teal-100">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <div>
-                        <p className="font-heading font-bold text-slate-900 leading-tight">{b.label}</p>
-                        <p className="text-xs text-slate-500">{b.time} · {b.desc}</p>
-                      </div>
-                    </div>
-                    <div className="divide-y divide-slate-100">
-                      {schedule[b.id].map((item) => (
-                        <div key={item.key} className="px-4 py-3.5 group/item">
-                          <div className="flex items-start justify-between gap-3">
-  <p className="font-semibold text-slate-800 text-sm">{item.name}</p>
-  <div className="flex items-center gap-2 shrink-0">
-    <span className="text-xs font-bold text-teal-700 bg-teal-50 border border-teal-100 px-2 py-0.5 rounded-full">{item.dose}</span>
-    <button
-      data-testid={`schedule-remove-${item.key}`}
-      onClick={() => removeFromSchedule(item)}
-      title="Pašalinti iš grafiko"
-      aria-label="Pašalinti iš grafiko"
-      className="flex h-6 w-6 items-center justify-center rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
-    >
-      <X className="h-4 w-4" />
-    </button>
-  </div>
-</div>
-<div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
-  <span className="inline-flex items-center gap-1 text-amber-700 bg-amber-50 border border-amber-100 px-2 py-0.5 rounded-full font-medium">
-    <Clock className="h-3 w-3" /> {item.stomach}
-  </span>
-</div>
-{item.note && (
-  <p className="mt-2 text-xs text-slate-500 leading-relaxed">{item.note}</p>
-)}
-<div className="mt-2 flex items-center gap-2 flex-wrap">
-  {item.isCustom && (
-    <span
-      data-testid={`schedule-tier-badge-${item.key}`}
-      title={TIERS[item.tier].label}
-      className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
-    >
-      <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
-    </span>
-  )}
-  <a
-    href={item.isCustom ? pubmedUrl(item.name) : "/?page=reklama"}
-    target="_blank"
-    rel="noopener noreferrer"
-    data-testid={item.isCustom ? `schedule-ref-link-${item.key}` : `partner-ref-link-${item.key}`}
-    className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
-  >
-    <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
-  </a>
-  <a
-    href="/?page=reklama"
-    target="_blank"
-    rel="noopener noreferrer"
-    data-testid={`partner-buy-external-link-${item.key}`}
-    className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900"
-  >
-    <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
-  </a>
-</div>
-                                className={`inline-flex items-center gap-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full border ${TIER_STYLES[item.tier]}`}
-                          
-                                <span className={`h-1.5 w-1.5 rounded-full ${TIER_DOT[item.tier]}`} /> {TIERS[item.tier].label}
-                              </span>
-                            )}
-                            <a
-                              href={item.isCustom ? pubmedUrl(item.name) : "/?page=reklama"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              data-testid={item.isCustom ? `schedule-ref-link-${item.key}` : `partner-ref-link-${item.key}`}
-                              className="inline-flex items-center gap-1 text-xs font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
-                            >
-                              <BookOpen className="h-3.5 w-3.5" /> Mokslinis tyrimas
-                            </a>
-                            <a
-                              href="/?page=reklama"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              data-testid={`partner-buy-external-link-${item.key}`}
-                              className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:text-teal-900"
-                            >
-                              <ShoppingBag className="h-3.5 w-3.5" /> Rekomenduojamas pasirinkimas / Kur įsigyti
-                            </a>
-                          </div>
-                          </div>
-                    </div>
-                  </div>
-                );
-              })}
-              <p className="text-[10px] text-slate-400 pt-2 border-t border-slate-100">Tik informaciniais tikslais. Pasitarkite su gydytoju. </p>
-            </div>
-          </div>
-        </div>
-
-        <section id="saltiniai" data-testid="scientific-sources-doi-block" className="bg-white border border-slate-200 p-6 sm:p-8 rounded-2xl shadow-sm">
-          <h2 className="font-heading text-2xl font-bold text-slate-900 flex items-center gap-2.5">
-            <FlaskConical className="h-6 w-6 text-teal-600" /> Moksliniai šaltiniai ir meta-analizės
-          </h2>
-          <p className="text-sm text-slate-500 mt-1.5">Realios sisteminės apžvalgos ir meta-analizės (PubMed / DOI).</p>
-          <div className="mt-6 grid sm:grid-cols-2 gap-4">
-            {SOURCES.map((s, i) => (
-              <a
-                key={i}
-                data-testid="pubmed-doi-reference-link"
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block rounded-xl border border-slate-200 p-4 hover:border-teal-300 hover:shadow-md hover:-translate-y-0.5 transition-all"
-              >
-                <p className="text-sm font-semibold text-slate-800 leading-snug">{s.title}</p>
-                <p className="text-xs text-slate-500 mt-1.5">{s.authors}</p>
-                <p className="text-xs font-mono text-teal-700 mt-1 inline-flex items-center gap-1">DOI: {s.doi} <ExternalLink className="h-3 w-3" /></p>
-              </a>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      <footer data-testid="main-footer" className="bg-[#1F1F1F] text-[#CDCDCD] mt-10 rounded-t-3xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-8">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <div className="flex items-center gap-2.5 mb-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
-                <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
-              </div>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold text-white mb-3">Jūsų reklama</h4>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
-              <a data-testid="partnership-contact-email-link" href="mailto:info@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
-                <Mail className="h-4 w-4" /> info@5op.lt
-              </a>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
-              <a
-                data-testid="footer-eshop-bright-cta-btn"
-                href="https://5op.lt/parduotuve/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
-              >
-                <ShoppingBag className="h-5 w-5" /> Apsilankyti el. parduotuvėje 5op.lt
-              </a>
-            </div>
-          </div>
-          <div data-testid="legal-disclaimer-footer" className="border-t border-[#2B2B2B] pt-6 text-xs text-slate-500 leading-relaxed">
-            {DISCLAIMER}
-          </div>
-          <p className="text-xs text-[#CDCDCD]">© {new Date().getFullYear()} 5op.lt All rights reserved.</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
+                  <DropdownMenuContent align="end" className="w-44">
+                    <DropdownMenuItem data-testid="export-
