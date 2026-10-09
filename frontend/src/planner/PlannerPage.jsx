@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import {
   Sunrise, Sun, Dumbbell, Activity, Moon, BedDouble, FlaskConical, ShieldAlert,
   Download, Link2, Plus, Trash2, ExternalLink, Mars, Venus, Baby, Leaf, Clock,
-  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles, X,
+  CircleCheck, Beaker, AlertTriangle, ShoppingBag, Mail, ChevronDown, Eraser, BookOpen, Search, Sparkles, X, Heart, Check,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -98,6 +98,27 @@ export default function PlannerPage() {
   const [cBlock, setCBlock] = useState("rytas");
   const [showSug, setShowSug] = useState(false);
   const captureRef = useRef(null);
+
+  // Thank You button state
+  const [thankCount, setThankCount] = useState(1002);
+  const [hasThanked, setHasThanked] = useState(false);
+
+  useEffect(() => {
+    const clicked = localStorage.getItem('planuokle_thanked');
+    if (clicked) {
+      setHasThanked(true);
+      setThankCount(Number(clicked));
+    }
+  }, []);
+
+  const handleThankClick = () => {
+    if (hasThanked) return;
+    const newCount = thankCount + 1;
+    setThankCount(newCount);
+    setHasThanked(true);
+    localStorage.setItem('planuokle_thanked', newCount.toString());
+    toast.success("Ačiū už jūsų palaikymą!");
+  };
 
   const buildShareUrl = () => {
     const code = encodeState({ profile, sensitive, selected, custom });
@@ -264,15 +285,29 @@ export default function PlannerPage() {
             <span className="block text-[11px] font-semibold text-slate-700 -mt-0.5">Vitaminų ir papildų vartojimo planuoklė</span>
           </span>
         </a>
-        <a
-          data-testid="header-eshop-cta-button"
-          href="https://5op.lt"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden sm:inline-flex items-center gap-2 rounded-full bg-slate-900 text-white text-sm font-semibold px-4 py-2 hover:bg-slate-700 active:scale-95 transition-all"
-        >
-          <ShoppingBag className="h-4 w-4" /> El. parduotuvė
-        </a>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleThankClick}
+            disabled={hasThanked}
+            className={`inline-flex items-center gap-1.5 rounded-full text-sm font-semibold px-4 py-2 transition-all border ${
+              hasThanked 
+                ? "bg-emerald-50 text-emerald-700 border-emerald-200 cursor-default" 
+                : "bg-white text-slate-700 border-slate-300 hover:border-teal-400 hover:text-teal-700 active:scale-95"
+            }`}
+          >
+            {hasThanked ? <Check className="h-4 w-4 text-emerald-600" /> : <Heart className="h-4 w-4 text-rose-500 fill-rose-500" />}
+            {hasThanked ? `Padėkota (${thankCount})` : `Ačiū (${thankCount})`}
+          </button>
+          <a
+            data-testid="header-eshop-cta-button"
+            href="https://5op.lt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-slate-900 text-white text-sm font-semibold px-4 py-2 hover:bg-slate-700 active:scale-95 transition-all"
+          >
+            <ShoppingBag className="h-4 w-4" /> El. parduotuvė
+          </a>
+        </div>
       </header>
 
       {/* Hero */}
