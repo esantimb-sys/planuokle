@@ -585,7 +585,9 @@ export default function PlannerPage() {
                   </a>
                 </div>
               ))}
-              <p className="text-[11px] text-slate-400 px-1">Reklaminė vieta — susisiekite: info@5op.lt</p>
+              <p className="text-[11px] text-slate-400 px-1">
+  Reklaminė vieta — susisiekite: <a href="mailto:info@5op.lt" className="underline hover:text-slate-200 transition-colors">info@5op.lt</a>
+</p>
             </section>
           </div>
 
