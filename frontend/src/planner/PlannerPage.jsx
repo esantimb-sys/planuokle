@@ -100,27 +100,27 @@ export default function PlannerPage() {
   const captureRef = useRef(null);
 
   const [thanksCount, setThanksCount] = useState(() => {
-    const saved = localStorage.getItem('planner_thanks_count_v4');
+    const saved = localStorage.getItem('planner_thanks_count_v5');
     return saved ? parseInt(saved, 10) : 0;
   });
 
   const [hasThanked, setHasThanked] = useState(() => {
-    return localStorage.getItem('planner_has_thanked_v4') === 'true';
+    return localStorage.getItem('planner_has_thanked_v5') === 'true';
   });
 
   useEffect(() => {
-    localStorage.setItem('planner_thanks_count_v4', thanksCount);
+    localStorage.setItem('planner_thanks_count_v5', thanksCount);
   }, [thanksCount]);
 
   useEffect(() => {
-    localStorage.setItem('planner_has_thanked_v4', hasThanked);
+    localStorage.setItem('planner_has_thanked_v5', hasThanked);
   }, [hasThanked]);
 
   const handleThanksClick = () => {
     if (hasThanked) return;
     setThanksCount(prev => prev + 1);
     setHasThanked(true);
-    toast.success("Ačiū už palaikymą!👍");
+    toast.success("Dėkui už įvertinimą!!👍");
   };
 
   const buildShareUrl = () => {
