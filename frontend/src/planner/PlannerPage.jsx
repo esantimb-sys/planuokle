@@ -100,20 +100,20 @@ export default function PlannerPage() {
   const captureRef = useRef(null);
 
   const [thanksCount, setThanksCount] = useState(() => {
-    const saved = localStorage.getItem('planner_thanks_count_v3');
+    const saved = localStorage.getItem('planner_thanks_count_v4');
     return saved ? parseInt(saved, 10) : 0;
   });
 
   const [hasThanked, setHasThanked] = useState(() => {
-    return localStorage.getItem('planner_has_thanked_v3') === 'true';
+    return localStorage.getItem('planner_has_thanked_v4') === 'true';
   });
 
   useEffect(() => {
-    localStorage.setItem('planner_thanks_count_v3', thanksCount);
+    localStorage.setItem('planner_thanks_count_v4', thanksCount);
   }, [thanksCount]);
 
   useEffect(() => {
-    localStorage.setItem('planner_has_thanked_v3', hasThanked);
+    localStorage.setItem('planner_has_thanked_v4', hasThanked);
   }, [hasThanked]);
 
   const handleThanksClick = () => {
