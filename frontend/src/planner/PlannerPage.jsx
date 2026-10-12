@@ -218,7 +218,7 @@ export default function PlannerPage() {
     try {
       if (type === "png") {
         const { default: html2canvas } = await import("html2canvas-pro");
-        await supabase.from('download_stats').insert([{ format: 'png' }]);
+        await supabase.rpc('increment_download', { format_name: 'png' });
         const canvas = await html2canvas(captureRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
         const link = document.createElement("a");
         link.download = "5op-atmintinė.png";
@@ -228,7 +228,7 @@ export default function PlannerPage() {
         const { default: jsPDF } = await import("jspdf");
         const fonts = await loadPdfFonts();
         const pdf = new jsPDF("p", "mm", "a4");
-        await supabase.from('download_stats').insert([{ format: 'pdf' }]);
+        await supabase.rpc('increment_download', { format_name: 'pdf' });
         pdf.addFileToVFS("DejaVuSans.ttf", fonts.reg);
         pdf.addFont("DejaVuSans.ttf", "Dejavu", "normal");
         pdf.addFileToVFS("DejaVuSans-Bold.ttf", fonts.bold);
