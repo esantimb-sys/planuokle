@@ -749,9 +749,9 @@ export default function PlannerPage() {
             <div>
               <div className="flex items-center gap-2.5 mb-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
-                <span className="font-heading font-extrabold text-white text-lg"></span>
+                <span className="font-heading font-extrabold text-white text-lg">Svarbu</span>
               </div>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo atmintinė. Moksliškai pagrįstas laikas ir dozės.</p>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Įdėmiai perskaitykite žemiau pateiktą informaciją.</p>
             </div>
             <div>
               <h4 className="font-heading font-bold text-white mb-3">Jūsų reklama</h4>
@@ -761,7 +761,7 @@ export default function PlannerPage() {
               </a>
             </div>
             <div>
-              <h4 className="font-heading font-bold text-white mb-3">Apsipirkite</h4>
+              <h4 className="font-heading font-bold text-white mb-3">Apsilankykite</h4>
               <a
                 data-testid="footer-eshop-bright-cta-btn"
                 href="https://5op.lt/parduotuve/"
@@ -769,7 +769,7 @@ export default function PlannerPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-teal-500 text-slate-900 font-bold px-6 py-3 hover:bg-teal-400 active:scale-95 transition-all shadow-lg shadow-teal-500/20"
               >
-                <ShoppingBag className="h-5 w-5" /> Apsilankyti el. parduotuvėje 5op.lt
+                <ShoppingBag className="h-5 w-5" />  el. parduotuvėje 5op.lt
               </a>
             </div>
           </div>
