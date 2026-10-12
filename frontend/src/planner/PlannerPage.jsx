@@ -223,8 +223,9 @@ export default function PlannerPage() {
         const link = document.createElement("a");
         link.download = "5op-atmintinė.png";
         link.href = canvas.toDataURL("image/png");
-        supabase.from('download_stats').insert([{ format: 'pdf' }]).then();
+      
         link.click();
+        supabase.from('download_stats').insert([{ format: 'pdf' }]).then();
       } else {
         const { default: jsPDF } = await import("jspdf");
         const fonts = await loadPdfFonts();
