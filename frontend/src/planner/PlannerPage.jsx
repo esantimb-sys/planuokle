@@ -53,7 +53,7 @@ const HERO_IMG =
   "https://images.unsplash.com/photo-1707129785947-ddc627a8bab9?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
 
 const DISCLAIMER =
-  "SVARBU / TEISINĖ INFORMACIJA: Ši svetainė ir joje pateikiama informacija yra tik rekomendacinio bei šviečiamojo pobūdžio. Planuoklės pateikiami duomenys, dozės ir laikai negali būti traktuojami kaip medicininė diagnozė, gydymo skyrimas ar sveikatos priežiūros specialisto konsultacija. Prieš pradedant vartoti bet kokius maisto papildus ar keičiant jų dozes, būtina pasitarti su gydytoju arba gydytoju dietologu. Svetainės administracija neprisiima atsakomybės už sprendimus, priimtus remiantis šio įrankio informacija.";
+  "SVARBU / TEISINĖ INFORMACIJA: Ši svetainė ir joje pateikiama informacija yra tik rekomendacinio bei šviečiamojo pobūdžio. Atmintinės pateikiami duomenys, dozės ir laikai negali būti traktuojami kaip medicininė diagnozė, gydymo skyrimas ar sveikatos priežiūros specialisto konsultacija. Prieš pradedant vartoti bet kokius maisto papildus ar keičiant jų dozes, būtina pasitarti su gydytoju arba gydytoju dietologu. Svetainės administracija neprisiima atsakomybės už sprendimus, priimtus remiantis šio įrankio informacija.";
 
 function encodeState(state) {
   try {
@@ -219,7 +219,7 @@ export default function PlannerPage() {
         const { default: html2canvas } = await import("html2canvas-pro");
         const canvas = await html2canvas(captureRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
         const link = document.createElement("a");
-        link.download = "5op-planuoklis.png";
+        link.download = "5op-atmintinė.png";
         link.href = canvas.toDataURL("image/png");
         link.click();
       } else {
@@ -260,7 +260,7 @@ export default function PlannerPage() {
         pdf.setFont("Dejavu", "normal"); pdf.setFontSize(7.5); pdf.setTextColor(120, 120, 120);
         const disc = pdf.splitTextToSize("Tik informaciniais ir šviečiamaisiais tikslais. Tai nėra medicininė konsultacija — prieš vartojant maisto papildus pasitarkite su gydytoju. Šaltinis: 5op.lt", maxW);
         pdf.text(disc, M, y);
-        pdf.save("5op-planuoklis.pdf");
+        pdf.save("5op-atmintinė.pdf");
       }
       toast.success("Grafikas atsisiųstas", { id: t });
     } catch (e) {
@@ -282,7 +282,7 @@ export default function PlannerPage() {
           </span>
           <span className="leading-tight">
             <span className="block font-heading font-extrabold text-slate-900 text-base">5op.lt</span>
-            <span className="block text-[11px] font-semibold text-slate-700 -mt-0.5">Vitaminų ir papildų vartojimo planuoklė</span>
+            <span className="block text-[11px] font-semibold text-slate-700 -mt-0.5">Vitaminų ir papildų vartojimo atmintinė</span>
           </span>
         </a>
         <a
@@ -303,7 +303,7 @@ export default function PlannerPage() {
               <FlaskConical className="h-3.5 w-3.5" /> Moksliškai pagrįsta
             </span>
             <h1 className="mt-5 font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.08]">
-              Vitaminų ir papildų <span className="text-teal-600">vartojimo laiko</span> planuoklė
+              Vitaminų ir papildų <span className="text-teal-600">vartojimo laiko</span> atmintinė
             </h1>
             <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
               Sudarykite asmeninį dienos grafiką pagal savo profilį. Optimalus laikas, dozės ir moksliniai pagrindimai – viename įrankyje.
@@ -748,11 +748,11 @@ export default function PlannerPage() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
                 <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
               </div>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo planuoklė. Moksliškai pagrįstas laikas ir dozės.</p>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo atmintinė. Moksliškai pagrįstas laikas ir dozės.</p>
             </div>
             <div>
               <h4 className="font-heading font-bold text-white mb-3">Jūsų reklama</h4>
-              <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje planuoklėje?</p>
+              <p className="text-sm text-[#CDCDCD] leading-relaxed">Norite reklamuoti savo prekės ženklo papildus šioje atmintinėje?</p>
               <a data-testid="partnership-contact-email-link" href="mailto:info@5op.lt" className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-teal-400 hover:text-teal-300">
                 <Mail className="h-4 w-4" /> info@5op.lt
               </a>
