@@ -218,7 +218,7 @@ export default function PlannerPage() {
     try {
       if (type === "png") {
         const { default: html2canvas } = await import("html2canvas-pro");
-        supabase.from('download_stats').insert([{ format: 'png' }]).then();
+        void supabase.from('download_stats').insert([{ format: 'png' }]);
         const canvas = await html2canvas(captureRef.current, { scale: 2, backgroundColor: "#ffffff", useCORS: true });
         const link = document.createElement("a");
         link.download = "5op-atmintinė.png";
