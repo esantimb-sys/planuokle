@@ -225,8 +225,9 @@ export default function PlannerPage() {
         link.href = canvas.toDataURL("image/png");
       
         link.click();
-        supabase.from('download_stats').insert([{ format: 'pdf' }]).then();
+        
       } else {
+        supabase.from('download_stats').insert([{ format: 'pdf' }]).then();
         const { default: jsPDF } = await import("jspdf");
         const fonts = await loadPdfFonts();
         const pdf = new jsPDF("p", "mm", "a4");
