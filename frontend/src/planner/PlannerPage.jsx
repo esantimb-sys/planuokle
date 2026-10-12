@@ -227,7 +227,7 @@ export default function PlannerPage() {
         link.click();
         
       } else {
-        supabase.from('download_stats').insert([{ format: 'pdf' }]).then();
+        void supabase.from('download_stats').insert([{ format: 'pdf' }]);
         const { default: jsPDF } = await import("jspdf");
         const fonts = await loadPdfFonts();
         const pdf = new jsPDF("p", "mm", "a4");
