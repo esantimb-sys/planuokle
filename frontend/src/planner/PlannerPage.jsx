@@ -284,7 +284,7 @@ export default function PlannerPage() {
             <Leaf className="h-5 w-5" />
           </span>
           <span className="leading-tight">
-            <span className="block font-heading font-extrabold text-slate-900 text-base">5op.lt</span>
+            <span className="block font-heading font-extrabold text-slate-900 text-base"></span>
             <span className="block text-[11px] font-semibold text-slate-700 -mt-0.5">Vitaminų ir papildų vartojimo atmintinė</span>
           </span>
         </a>
@@ -749,7 +749,7 @@ export default function PlannerPage() {
             <div>
               <div className="flex items-center gap-2.5 mb-3">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-white"><Leaf className="h-5 w-5" /></span>
-                <span className="font-heading font-extrabold text-white text-lg">5op.lt</span>
+                <span className="font-heading font-extrabold text-white text-lg"></span>
               </div>
               <p className="text-sm text-[#CDCDCD] leading-relaxed">Vitaminų ir papildų vartojimo atmintinė. Moksliškai pagrįstas laikas ir dozės.</p>
             </div>
