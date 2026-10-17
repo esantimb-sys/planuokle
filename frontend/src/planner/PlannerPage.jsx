@@ -302,9 +302,15 @@ export default function PlannerPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50/70 via-amber-50/30 to-teal-50/60 border-b border-slate-200/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 grid lg:grid-cols-2 gap-10 items-center">
           <div className="animate-fade-up">
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-teal-700 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
-              <FlaskConical className="h-3.5 w-3.5" /> Su nuorodomis į tyrimus *į PubMed, JAV nacionalinę medicinos tyrimų biblioteką
-            </span>
+            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-teal-700 bg-teal-50 px-3 py-1.5 rounded-2xl border border-teal-200">
+  <FlaskConical className="h-3.5 w-3.5 shrink-0" />
+  <span className="flex flex-col leading-tight">
+    <span>Su nuorodomis į tyrimus</span>
+    <span className="text-[10px] font-normal normal-case tracking-normal opacity-70">
+      * į PubMed, JAV nacionalinę medicinos tyrimų biblioteką
+    </span>
+  </span>
+</span>
             <h1 className="mt-5 font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.08]">
               Vitaminų ir papildų <span className="text-teal-600">vartojimo laiko</span> atmintinė
             </h1>
