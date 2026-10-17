@@ -307,7 +307,7 @@ export default function PlannerPage() {
   <span className="flex flex-col leading-tight">
     <span>Su nuorodomis į tyrimus</span>
     <span className="text-[10px] font-normal normal-case tracking-normal opacity-70">
-      * į PubMed, JAV nacionalinę medicinos tyrimų biblioteką
+      * PubMed, JAV nacionalinė medicinos tyrimų biblioteka
     </span>
   </span>
 </span>
