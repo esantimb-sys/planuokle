@@ -457,7 +457,7 @@ export default function PlannerPage() {
                                 onClick={(e) => e.stopPropagation()}
                                 className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
                               >
-                                <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                                <BookOpen className="h-3 w-3" /> Ką sako tyrimai
                               </a>
                             )}
                           </span>
@@ -554,7 +554,7 @@ export default function PlannerPage() {
                             data-testid={`custom-ref-link-${c.id}`}
                             className="mt-1 ml-2 inline-flex items-center gap-1 text-[10px] font-semibold text-teal-700 hover:text-teal-900 underline decoration-teal-300 underline-offset-2"
                           >
-                            <BookOpen className="h-3 w-3" /> Mokslinis tyrimas
+                            <BookOpen className="h-3 w-3" /> Ką sako tyrimai
                           </a>
                         </span>
                         <button data-testid={`custom-remove-${c.id}`} onClick={() => setCustom((p) => p.filter((x) => x.id !== c.id))} className="text-rose-500 hover:text-rose-700 shrink-0">
