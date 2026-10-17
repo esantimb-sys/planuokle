@@ -723,7 +723,7 @@ export default function PlannerPage() {
           <h2 className="font-heading text-2xl font-bold text-slate-900 flex items-center gap-2.5">
             <FlaskConical className="h-6 w-6 text-teal-600" /> Moksliniai šaltiniai ir meta-analizės
           </h2>
-          <p className="text-sm text-slate-500 mt-1.5">Realios sisteminės apžvalgos ir meta-analizės (PubMed / DOI).</p>
+          <p className="text-sm text-slate-500 mt-1.5"> Sisteminės apžvalgos ir meta-analizės (PubMed / DOI).</p>
           <div className="mt-6 grid sm:grid-cols-2 gap-4">
             {SOURCES.map((s, i) => (
               <a
