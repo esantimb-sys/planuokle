@@ -290,9 +290,9 @@ export const TIER_MAP = {
 
 export const TIERS = {
   0: { label: "Neklasifikuota", emoji: "⚪", desc: "Jūsų pridėtas papildas – įrodymų lygis neįvertintas. Rekomenduojame pasidomėti tyrimais." },
-  1: { label: "Svarbiausi", emoji: "🟢", desc: "Tvirtas mokslinis pagrindas ir nauda daugeliui žmonių. Puikus atspirties taškas." },
-  2: { label: "Moksliškai pagrįsti", emoji: "🟡", desc: "Gerai ištirti ir veiksmingi siekiant konkretaus tikslo (sportas, miegas, imunitetas)." },
-  3: { label: "Eksperimentiniai", emoji: "🟠", desc: "Perspektyvūs, bet įrodymai dar riboti ar nevienareikšmiai (ilgaamžiškumas, adaptogenai)." },
+  1: { label: "Stiprūs įrodymai", emoji: "🟢", desc: "Tvirtas mokslinis pagrindas ir nauda daugeliui žmonių. Puikus atspirties taškas." },
+  2: { label: "Geri įrodymai", emoji: "🟡", desc: "Gerai ištirti ir veiksmingi siekiant konkretaus tikslo (sportas, miegas, imunitetas)." },
+  3: { label: "Riboti įrodymai", emoji: "🟠", desc: "Perspektyvūs, bet įrodymai dar riboti ar nevienareikšmiai (ilgaamžiškumas, adaptogenai)." },
   4: { label: "Mažai veiksmingi / pervertinti", emoji: "🔴", desc: "Silpni įrodymai arba dažnai pervertinti – sveikiems žmonėms nauda abejotina." },
 };
 
