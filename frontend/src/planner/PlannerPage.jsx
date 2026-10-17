@@ -305,7 +305,7 @@ export default function PlannerPage() {
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-teal-700 bg-teal-50 px-3 py-1.5 rounded-2xl border border-teal-200">
   <FlaskConical className="h-3.5 w-3.5 shrink-0" />
   <span className="flex flex-col leading-tight">
-    <span>Su nuorodomis į tyrimus</span>
+    <span>Su nuorodomis į tyrimus*</span>
     <span className="text-[10px] font-normal normal-case tracking-normal opacity-70">
       * PubMed, JAV nacionalinė medicinos tyrimų biblioteka
     </span>
