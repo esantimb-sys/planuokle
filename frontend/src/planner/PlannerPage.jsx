@@ -302,7 +302,7 @@ export default function PlannerPage() {
       <section className="relative overflow-hidden bg-gradient-to-br from-emerald-50/70 via-amber-50/30 to-teal-50/60 border-b border-slate-200/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 grid lg:grid-cols-2 gap-10 items-center">
           <div className="animate-fade-up">
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-teal-700 bg-teal-50 px-3 py-1.5 rounded-2xl border border-teal-200">
+            <span className="inline-flex items-center gap-2 text-xs  tracking-normal font-semibold text-teal-700 bg-teal-50 px-3 py-1.5 rounded-2xl border border-teal-200">
   <FlaskConical className="h-3.5 w-3.5 shrink-0" />
   <span className="flex flex-col leading-tight">
     <span>Su nuorodomis į tyrimus*</span>
