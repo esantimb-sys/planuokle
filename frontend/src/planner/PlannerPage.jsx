@@ -315,7 +315,7 @@ export default function PlannerPage() {
               Vitaminų ir papildų <span className="text-teal-600">vartojimo laiko</span> atmintinė
             </h1>
             <p className="mt-5 text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
-              Sudarykite asmeninį dienos grafiką pagal savo profilį. Optimalus laikas, dozės ir moksliniai pagrindimai – viename įrankyje.
+              Sudarykite asmeninį dienos grafiką pagal savo profilį. Optimalus laikas, dozės ir mokslinės tyrimų nuorodos – viename įrankyje.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <a href="#planuoklis" className="inline-flex items-center gap-2 rounded-full bg-teal-600 text-white font-semibold px-6 py-3 hover:bg-teal-700 active:scale-95 transition-all shadow-lg shadow-teal-600/25">
